@@ -1,36 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ConnectX — Product Roadmap v2 · Internal</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ConnectX by Imperio — App Vision</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f1eeea;
-    --paper: #ffffff;
+    --bg-card: #ffffff;
     --ink: #0a0a0a;
-    --ink-muted: #5e5e5e;
+    --ink-muted: #6b6b6b;
     --ink-soft: #9a9a9a;
     --accent: #6d4eff;
     --accent-soft: #ece6ff;
     --peach-1: #ffd9c2;
     --peach-2: #ffb59a;
     --coral: #ff8b6b;
-    --green: #2f9a5e;
-    --amber: #c98a00;
-    --teal: #2c8a8a;
-    --line: rgba(10,10,10,0.1);
-    --line-strong: rgba(10,10,10,0.2);
-
-    /* Phase colors */
-    --p0: #8c8c8c;
-    --p1: #6d4eff;
-    --p2: #ff8b6b;
-    --p3: #2f9a5e;
-    --p4: #c98a00;
+    --line: rgba(10,10,10,0.08);
+    --line-strong: rgba(10,10,10,0.18);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
@@ -39,1275 +29,1714 @@
     font-family: 'Manrope', sans-serif;
     background: var(--bg);
     color: var(--ink);
+    overflow-x: hidden;
     font-feature-settings: "ss01", "ss02";
-    padding: 30px;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
   }
 
   .serif { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.01em; }
   .italic { font-style: italic; }
 
-  /* ===== PAGE ===== */
-  .page {
-    width: 297mm;
-    min-height: 210mm;
-    background: var(--paper);
-    padding: 12mm 12mm 10mm;
-    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.25);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-
   /* ===== HEADER ===== */
-  .header {
+  header {
+    padding: 28px 48px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 8px;
-    border-bottom: 1.5px solid var(--ink);
-    margin-bottom: 10px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: rgba(241,238,234,0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 50;
+    border-bottom: 1px solid var(--line);
   }
-  .header-left .brand {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    margin-bottom: 2px;
-  }
+  .brand { font-size: 22px; font-weight: 700; letter-spacing: -0.04em; }
   .brand-dot { color: var(--accent); }
-  .header-left h1 {
-    font-size: 26px;
-    line-height: 1;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
-  .header-left h1 .serif { font-size: 1.05em; line-height: 0.9; }
-  .header-right {
-    text-align: right;
-  }
-  .meta-line {
+  .header-meta {
     display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    font-size: 8px;
+    gap: 32px;
+    font-size: 12px;
     color: var(--ink-muted);
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
   }
-  .meta-line strong { color: var(--ink); font-weight: 600; }
-  .stamp {
-    display: inline-block;
-    margin-top: 4px;
-    font-size: 7.5px;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 2px 7px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
+  .header-meta span:last-child { color: var(--ink); }
+
+  .site-nav { display: flex; gap: 6px; }
+  .site-nav-link {
+    font-size: 13px;
     font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--ink-muted);
+    padding: 7px 18px;
+    border-radius: 100px;
+    transition: all 0.2s ease;
   }
+  .site-nav-link:hover { color: var(--ink); background: rgba(10,10,10,0.05); }
+  .site-nav-link.active { color: #fff; background: var(--accent); }
 
-  /* ===== TOP STRIP : MISSION + DECISIONS ===== */
-  .top-strip {
-    display: grid;
-    grid-template-columns: 1.4fr 2fr;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .mission {
-    background: linear-gradient(135deg, #0a0a0a 0%, #2a1f4f 100%);
-    color: #fff;
-    padding: 10px 12px;
-    border-radius: 10px;
+  /* ===== HERO ===== */
+  .hero {
+    padding: 80px 48px 60px;
     position: relative;
     overflow: hidden;
   }
-  .mission::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 100px; height: 100px;
-    background: radial-gradient(circle, rgba(255,217,194,0.5) 0%, transparent 70%);
-  }
-  .mission .label {
-    font-size: 7.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    opacity: 0.6;
-    margin-bottom: 4px;
-  }
-  .mission .text {
-    font-family: 'Instrument Serif', serif;
-    font-size: 14px;
-    line-height: 1.15;
-    position: relative;
-    z-index: 2;
-  }
-  .mission .text .italic { color: var(--peach-1); }
-  .mission .sub {
-    font-size: 8.5px;
-    line-height: 1.5;
-    opacity: 0.7;
-    margin-top: 6px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .decisions {
-    background: var(--bg);
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-  }
-  .decisions .label {
-    font-size: 7.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--ink-muted);
-    margin-bottom: 6px;
-  }
-  .dec-grid {
+  .hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px 12px;
+    gap: 60px;
+    align-items: end;
+    max-width: 1500px;
+    margin: 0 auto;
   }
-  .dec {
-    display: flex;
-    gap: 6px;
-    font-size: 8.5px;
-    line-height: 1.3;
-  }
-  .dec .n {
-    font-family: 'Instrument Serif', serif;
-    font-size: 11px;
-    line-height: 1;
-    color: var(--accent);
-    flex-shrink: 0;
-    width: 12px;
-  }
-  .dec strong { font-weight: 700; }
-  .dec span { color: var(--ink-muted); }
-
-  /* ===== TOWNSHIP MAP SECTION ===== */
-  .map-section {
-    margin-bottom: 10px;
-  }
-
-  .section-head {
-    display: flex;
+  .hero-eyebrow {
+    display: inline-flex;
     align-items: center;
     gap: 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-muted);
+    margin-bottom: 32px;
+  }
+  .pulse {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+  h1 {
+    font-size: clamp(56px, 7vw, 108px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  h1 .serif { font-size: 1.05em; line-height: 0.9; }
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    max-width: 460px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .hero-meta div { font-size: 12px; }
+  .hero-meta div span:first-child {
+    display: block;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 10px;
     margin-bottom: 6px;
   }
-  .section-head .num {
+  .hero-meta div span:last-child { font-weight: 600; }
+
+  /* HERO PHONE (right side) */
+  .hero-phone-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    height: 640px;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--peach-2) 0%, var(--peach-1) 30%, transparent 65%);
+    filter: blur(40px);
+    top: 0;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  /* ===== PHONE FRAME (shared) ===== */
+  .phone {
+    width: 280px;
+    height: 580px;
+    background: #0a0a0a;
+    border-radius: 42px;
+    padding: 10px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.05) inset,
+      0 30px 80px -20px rgba(0,0,0,0.35),
+      0 10px 30px -5px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 1;
+  }
+  .phone-screen {
+    width: 100%; height: 100%;
+    border-radius: 32px;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+  }
+  .notch {
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    width: 86px; height: 24px;
+    background: #0a0a0a;
+    border-radius: 14px;
+    z-index: 10;
+  }
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 22px 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    position: relative;
+    z-index: 5;
+  }
+  .status-bar .icons { display: flex; gap: 5px; align-items: center; font-size: 10px; }
+
+  /* HERO PHONE SCREEN — Welcome / Home */
+  .screen-welcome {
+    height: 100%;
+    background: linear-gradient(165deg, #fff 0%, var(--peach-1) 60%, var(--coral) 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 0 22px;
+    padding-top: 50px;
+  }
+  .welcome-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
+  .welcome-brand { font-size: 14px; font-weight: 700; letter-spacing: -0.03em; }
+  .welcome-brand .dot { color: var(--accent); }
+  .tenz-logo {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    opacity: 0.7;
+  }
+  .welcome-greet {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(10,10,10,0.55);
+    margin-bottom: 6px;
+  }
+  .welcome-name {
     font-family: 'Instrument Serif', serif;
-    font-size: 14px;
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .welcome-name .italic { font-style: italic; color: rgba(10,10,10,0.55); }
+  .welcome-prompt {
+    font-size: 13px;
+    color: rgba(10,10,10,0.65);
+    margin-top: 20px;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+
+  .quick-card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .qcard {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.6);
+    border-radius: 16px;
+    padding: 12px;
+    font-size: 10px;
+  }
+  .qcard .label {
+    color: rgba(10,10,10,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 8px;
+    margin-bottom: 6px;
+  }
+  .qcard .value { font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+  .qcard .delta { color: var(--accent); font-size: 9px; margin-top: 2px; }
+
+  .nav-pill {
+    margin-top: auto;
+    margin-bottom: 24px;
+    background: #0a0a0a;
+    border-radius: 100px;
+    padding: 8px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-item {
+    flex: 1;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 8px 0;
+    border-radius: 100px;
+    transition: all 0.3s;
+  }
+  .nav-item.active {
+    background: #fff;
+    color: #0a0a0a;
+  }
+
+  /* ===== SECTION DIVIDER ===== */
+  .divider-section {
+    padding: 80px 48px 40px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .divider-line {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .divider-line .num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 24px;
     color: var(--ink-muted);
   }
-  .section-head .title {
+  .divider-line .label {
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-muted);
   }
-  .section-head .title .serif { font-style: italic; color: var(--ink-muted); font-weight: 400; }
-  .section-head hr {
+  .divider-line hr {
     flex: 1;
     border: none;
     border-top: 1px solid var(--line);
   }
-  .section-head .note {
-    font-size: 8px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
+  .section-title {
+    font-size: clamp(36px, 4.5vw, 60px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    max-width: 800px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .section-title .serif { font-style: italic; color: var(--ink-muted); }
+  .section-sub {
+    color: var(--ink-muted);
+    font-size: 16px;
+    max-width: 540px;
+    line-height: 1.55;
   }
 
-  .map-canvas {
-    background: linear-gradient(180deg, #fafaf7 0%, #f1eeea 100%);
+  /* ===== PILLARS ===== */
+  .pillars-section { padding: 40px 48px 80px; max-width: 1500px; margin: 0 auto; }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .pillar {
+    background: var(--bg-card);
+    border-radius: 22px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
     border: 1px solid var(--line);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .pillar:hover { transform: translateY(-4px); box-shadow: 0 20px 50px -25px rgba(0,0,0,0.2); }
+  .pillar-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 80px;
+  }
+  .pillar-icon {
+    width: 40px; height: 40px;
     border-radius: 12px;
-    padding: 8px;
+    background: var(--accent-soft);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+    color: var(--accent);
+  }
+  .pillar h3 {
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .pillar p {
+    color: var(--ink-muted);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .pillar:nth-child(2) .pillar-icon { background: #ffe7d9; color: var(--coral); }
+  .pillar:nth-child(3) .pillar-icon { background: #e7f5ec; color: #2f9a5e; }
+  .pillar:nth-child(4) .pillar-icon { background: #fff1c4; color: #c98a00; }
+
+  /* ===== SCREENS GALLERY ===== */
+  .gallery-section {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 100px 48px;
+    position: relative;
+  }
+  .gallery-section .section-title { color: #fff; }
+  .gallery-section .section-sub { color: rgba(255,255,255,0.6); }
+  .gallery-section .divider-line .num { color: rgba(255,255,255,0.4); }
+  .gallery-section .divider-line .label { color: rgba(255,255,255,0.5); }
+  .gallery-section .divider-line hr { border-color: rgba(255,255,255,0.1); }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px 40px;
+    max-width: 1500px;
+    margin: 70px auto 0;
+  }
+  .screen-block { display: flex; flex-direction: column; align-items: center; }
+  .screen-block .phone { margin-bottom: 28px; }
+  .screen-meta {
+    text-align: center;
+    max-width: 280px;
+  }
+  .screen-tag {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--peach-1);
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,217,194,0.3);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+  .screen-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    line-height: 1.1;
+  }
+  .screen-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  /* ====== SCREEN STYLES (white-bg inside phones) ====== */
+  .scr {
+    height: 100%;
+    background: #fff;
+    color: #0a0a0a;
+    padding: 0 18px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
   }
-
-  .map-svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .map-legend {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(8px);
-    padding: 8px 10px;
-    border-radius: 8px;
-    border: 1px solid var(--line);
-    font-size: 7.5px;
-  }
-  .legend-title {
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--ink-muted);
-    margin-bottom: 4px;
-    font-weight: 600;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    line-height: 1.5;
-  }
-  .legend-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  /* ===== TIMELINE PHASES ===== */
-  .timeline-section {
-    margin-bottom: 10px;
-  }
-  .timeline {
-    display: grid;
-    grid-template-columns: 0.7fr 1fr 1fr 1fr 1fr;
-    gap: 6px;
-  }
-  .phase {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 10px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
-  .phase::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 10px; right: 10px;
-    height: 3px;
-    border-radius: 0 0 3px 3px;
-  }
-  .phase.p0::before { background: var(--p0); }
-  .phase.p1::before { background: var(--p1); }
-  .phase.p2::before { background: var(--p2); }
-  .phase.p3::before { background: var(--p3); }
-  .phase.p4::before { background: var(--p4); }
-
-  .phase-top {
+  .scr-head {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 5px;
-    margin-bottom: 2px;
-    gap: 4px;
+    align-items: center;
+    margin-bottom: 16px;
   }
-  .phase-num {
+  .scr-head .menu {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: #f1eeea;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .scr-head .avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--peach-2), var(--coral));
+  }
+  .scr-title-xl {
     font-family: 'Instrument Serif', serif;
+    font-size: 30px;
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+  }
+  .scr-title-xl .italic { font-style: italic; color: var(--ink-muted); }
+  .scr-sub-sm {
+    font-size: 10px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 18px;
+  }
+
+  /* DISCOVER / Commerce screen */
+  .search-bar {
+    background: #f1eeea;
+    border-radius: 14px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .filter-chips {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .chip {
+    font-size: 9px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    background: #f1eeea;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+  .chip.active { background: #0a0a0a; color: #fff; }
+
+  .promo-card {
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 10px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .promo-card.p1 { background: linear-gradient(135deg, #2a2828, #4a3b35); }
+  .promo-card.p2 { background: linear-gradient(135deg, var(--coral), #d96a4d); }
+  .promo-tag {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.8;
+    margin-bottom: 4px;
+  }
+  .promo-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .promo-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 9px;
+    opacity: 0.9;
+  }
+  .promo-points {
+    background: rgba(255,255,255,0.2);
+    padding: 3px 8px;
+    border-radius: 100px;
+    font-weight: 700;
+  }
+
+  .shop-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .shop-mini {
+    background: #f8f6f3;
+    border-radius: 12px;
+    padding: 10px;
+  }
+  .shop-thumb {
+    width: 100%;
+    height: 42px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .shop-name { font-size: 10px; font-weight: 700; }
+  .shop-cat { font-size: 8px; color: var(--ink-soft); margin-top: 1px; }
+
+  /* LOYALTY screen */
+  .loyalty-hero {
+    background: linear-gradient(140deg, #0a0a0a, #2a1f4f);
+    border-radius: 22px;
+    padding: 20px;
+    color: #fff;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .loyalty-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(109,78,255,0.6) 0%, transparent 70%);
+  }
+  .loyalty-tier {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+    margin-bottom: 6px;
+  }
+  .loyalty-points {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .loyalty-points-lbl {
+    font-size: 9px;
+    opacity: 0.6;
+    margin-bottom: 14px;
+  }
+  .progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 2;
+  }
+  .progress-fill { height: 100%; width: 68%; background: var(--peach-1); border-radius: 100px; }
+  .progress-lbl {
+    font-size: 8px;
+    opacity: 0.6;
+    display: flex; justify-content: space-between;
+  }
+
+  .reward-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .reward-thumb {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--peach-1), var(--coral));
+    flex-shrink: 0;
+  }
+  .reward-thumb.r2 { background: linear-gradient(135deg, #d4f0e1, #8ec5a6); }
+  .reward-thumb.r3 { background: linear-gradient(135deg, #fff1c4, #f0c674); }
+  .reward-info { flex: 1; min-width: 0; }
+  .reward-name { font-size: 11px; font-weight: 700; margin-bottom: 2px; }
+  .reward-merch { font-size: 9px; color: var(--ink-soft); }
+  .reward-cost {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* RESIDENT / LIVING screen */
+  .living-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .live-tile {
+    background: #f8f6f3;
+    border-radius: 14px;
+    padding: 14px 12px;
+    aspect-ratio: 1 / 0.95;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .live-tile.feature {
+    grid-column: span 2;
+    aspect-ratio: 2 / 0.9;
+    background: linear-gradient(135deg, var(--peach-1), var(--peach-2));
+    color: var(--ink);
+  }
+  .live-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .live-label {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .live-sub {
+    font-size: 9px;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+  .feature .live-icon { background: rgba(10,10,10,0.1); }
+  .feature .live-label { font-size: 16px; font-family: 'Instrument Serif', serif; font-weight: 400; }
+  .feature .live-sub { color: rgba(10,10,10,0.6); font-size: 10px; }
+
+  .activity-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .activity-row:last-child { border: none; }
+  .act-icon {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    margin-right: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .act-info { flex: 1; min-width: 0; }
+  .act-name { font-size: 10px; font-weight: 600; }
+  .act-time { font-size: 8px; color: var(--ink-soft); }
+  .act-status {
+    font-size: 9px;
+    color: var(--ink-muted);
+  }
+
+  /* TENANT (B2B) screen */
+  .scr-dark {
+    background: #0a0a0a;
+    color: #fff;
+  }
+  .scr-dark .scr-sub-sm { color: rgba(255,255,255,0.5); }
+  .scr-dark .scr-title-xl { color: #fff; }
+  .scr-dark .scr-head .menu { background: #1a1a1a; color: rgba(255,255,255,0.8); }
+
+  .stat-card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .stat-card.gradient {
+    background: linear-gradient(135deg, var(--accent), #5235e8);
+  }
+  .stat-row { display: flex; justify-content: space-between; align-items: center; }
+  .stat-lbl {
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    font-style: italic;
+    opacity: 0.6;
+    margin-bottom: 6px;
   }
-  .phase.p0 .phase-num { color: var(--p0); }
-  .phase.p1 .phase-num { color: var(--p1); }
-  .phase.p2 .phase-num { color: var(--p2); }
-  .phase.p3 .phase-num { color: var(--p3); }
-  .phase.p4 .phase-num { color: var(--p4); }
-
-  .phase-pin {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    color: #fff;
-    font-size: 8px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .phase.p0 .phase-pin { background: var(--p0); }
-  .phase.p1 .phase-pin { background: var(--p1); }
-  .phase.p2 .phase-pin { background: var(--p2); }
-  .phase.p3 .phase-pin { background: var(--p3); }
-  .phase.p4 .phase-pin { background: var(--p4); }
-
-  .phase-time {
-    font-size: 7px;
-    background: var(--bg);
-    padding: 2px 5px;
-    border-radius: 100px;
-    color: var(--ink-muted);
-    font-weight: 600;
-    letter-spacing: 0.04em;
-  }
-  .phase-title {
+  .stat-val {
     font-family: 'Instrument Serif', serif;
-    font-size: 14px;
+    font-size: 28px;
     line-height: 1;
     letter-spacing: -0.02em;
-    margin-bottom: 3px;
   }
-  .phase-wedge {
-    font-size: 7.5px;
-    color: var(--ink-muted);
-    line-height: 1.3;
-    margin-bottom: 6px;
-    padding-bottom: 6px;
-    border-bottom: 1px dashed var(--line);
-    font-style: italic;
+  .stat-delta {
+    font-size: 10px;
+    color: #6ee7a7;
+    margin-top: 4px;
   }
 
-  .phase-section {
-    margin-bottom: 5px;
-  }
-  .phase-section .lbl {
-    font-size: 6.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-soft);
-    margin-bottom: 2px;
-    font-weight: 600;
-  }
-  .phase-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  .phase-section li {
-    font-size: 7.5px;
-    line-height: 1.3;
-    padding: 0px 0;
-    color: var(--ink);
+  .chart-bars {
     display: flex;
-    gap: 4px;
+    align-items: flex-end;
+    gap: 5px;
+    height: 50px;
+    margin-top: 10px;
   }
-  .phase-section li::before {
-    content: '·';
-    color: var(--ink-soft);
-    flex-shrink: 0;
-  }
-
-  .phase-foot {
-    margin-top: auto;
-    padding-top: 5px;
-    border-top: 1px solid var(--line);
-  }
-  .phase-foot .row {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 3px;
-  }
-  .phase-foot .col {
+  .bar {
     flex: 1;
-    min-width: 0;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px 3px 0 0;
+    position: relative;
   }
-  .phase-foot .lbl {
-    font-size: 6.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--ink-soft);
-    margin-bottom: 1px;
-    font-weight: 600;
-  }
-  .phase-foot .val {
-    font-size: 8px;
-    line-height: 1.25;
-    font-weight: 600;
-  }
-  .phase-foot .kill {
-    font-size: 7px;
-    line-height: 1.3;
-    color: var(--coral);
-    font-style: italic;
-  }
+  .bar.hi { background: var(--peach-1); }
+  .bar.med { background: rgba(255,217,194,0.4); }
 
-  /* ===== BOTTOM ROW ===== */
-  .bottom-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+  .campaign-card {
+    background: #1a1a1a;
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
     gap: 10px;
   }
-  .panel {
-    background: var(--bg);
+  .camp-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #6ee7a7;
+    flex-shrink: 0;
+  }
+  .camp-dot.warn { background: #fbbf24; }
+  .camp-info { flex: 1; min-width: 0; }
+  .camp-title { font-size: 10px; font-weight: 700; margin-bottom: 2px; }
+  .camp-meta { font-size: 8px; opacity: 0.5; }
+  .camp-val { font-size: 11px; font-weight: 700; font-family: 'Instrument Serif', serif; }
+
+  /* COMMUNITY screen */
+  .event-feat {
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #2c5f4a, #1f4534);
+    color: #fff;
+    aspect-ratio: 1 / 1.1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .event-feat::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; right: -30px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,217,194,0.2);
+  }
+  .event-tag {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.7;
+  }
+  .event-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 24px;
+    line-height: 1;
+    z-index: 2;
+    position: relative;
+  }
+  .event-meta {
+    display: flex; gap: 8px;
+    font-size: 9px;
+    opacity: 0.8;
+    z-index: 2;
+    position: relative;
+  }
+  .event-list-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .event-date {
+    background: #f1eeea;
     border-radius: 10px;
-    padding: 9px 11px;
+    padding: 6px 8px;
+    text-align: center;
+    min-width: 36px;
+  }
+  .event-date .day {
+    font-family: 'Instrument Serif', serif;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .event-date .mo {
+    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+  .event-info { flex: 1; min-width: 0; }
+  .event-info .t { font-size: 10px; font-weight: 700; margin-bottom: 2px; }
+  .event-info .l { font-size: 8px; color: var(--ink-soft); }
+
+  /* VISITOR / QR screen */
+  .qr-screen {
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1428 100%);
+    color: #fff;
+  }
+  .qr-screen .scr-head .menu { background: rgba(255,255,255,0.1); color: #fff; }
+  .qr-screen .scr-title-xl { color: #fff; }
+  .qr-card {
+    background: #fff;
+    color: #0a0a0a;
+    border-radius: 22px;
+    padding: 20px;
+    margin: 14px 0;
+    text-align: center;
+  }
+  .qr-visual {
+    width: 140px; height: 140px;
+    margin: 0 auto 14px;
+    background:
+      linear-gradient(45deg, transparent 48%, #0a0a0a 48%, #0a0a0a 52%, transparent 52%) 0 0 / 12px 12px,
+      linear-gradient(-45deg, transparent 48%, #0a0a0a 48%, #0a0a0a 52%, transparent 52%) 0 0 / 12px 12px,
+      radial-gradient(circle at 20% 20%, #0a0a0a 12%, transparent 13%),
+      radial-gradient(circle at 80% 20%, #0a0a0a 12%, transparent 13%),
+      radial-gradient(circle at 20% 80%, #0a0a0a 12%, transparent 13%),
+      #fff;
+    border-radius: 14px;
+    position: relative;
+  }
+  .qr-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-conic-gradient(#0a0a0a 0% 4%, #fff 4% 8%);
+    -webkit-mask: radial-gradient(circle, transparent 30%, #000 30%);
+            mask: radial-gradient(circle, transparent 30%, #000 30%);
+    opacity: 0.6;
+    border-radius: 14px;
+  }
+  .qr-name { font-size: 11px; font-weight: 700; margin-bottom: 2px; }
+  .qr-id { font-size: 9px; color: var(--ink-soft); letter-spacing: 0.1em; }
+
+  .visitor-perk {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .perk-icon {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .perk-icon.b2 { background: var(--coral); }
+  .perk-text { flex: 1; }
+  .perk-t { font-size: 10px; font-weight: 700; margin-bottom: 1px; }
+  .perk-s { font-size: 8px; opacity: 0.6; }
+
+  /* ===== ECOSYSTEM LOOP ===== */
+  .loop-section {
+    padding: 100px 48px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .loop-canvas {
+    margin-top: 80px;
+    background: var(--bg-card);
+    border-radius: 28px;
+    padding: 70px 40px;
+    position: relative;
+    overflow: hidden;
     border: 1px solid var(--line);
   }
-  .panel.dark {
+  .loop-orbit {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    height: 480px;
+    margin: 0 auto;
+  }
+  .orbit-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px; height: 180px;
     background: #0a0a0a;
     color: #fff;
-    border-color: #0a0a0a;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 5;
   }
-  .panel-label {
-    font-size: 7.5px;
+  .orbit-center .lbl-sm {
+    font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--ink-muted);
+    letter-spacing: 0.2em;
+    opacity: 0.6;
     margin-bottom: 6px;
-    font-weight: 600;
   }
-  .panel.dark .panel-label { color: rgba(255,255,255,0.55); }
-
-  .star-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px 10px;
-  }
-  .star {
-    font-size: 8px;
-    line-height: 1.25;
-  }
-  .star .v {
+  .orbit-center .lbl-lg {
     font-family: 'Instrument Serif', serif;
-    font-size: 13px;
+    font-size: 28px;
     line-height: 1;
-    color: var(--peach-1);
-    display: block;
-    margin-bottom: 1px;
   }
-  .star .l {
-    opacity: 0.75;
-    font-size: 7.5px;
-  }
+  .orbit-center .lbl-tg { font-size: 9px; opacity: 0.6; margin-top: 6px; }
 
-  .risk-item {
-    display: flex;
-    gap: 6px;
-    font-size: 8px;
-    line-height: 1.3;
-    padding: 2px 0;
+  .orbit-ring {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px; height: 420px;
+    border: 1px dashed var(--line-strong);
+    border-radius: 50%;
   }
-  .risk-item .tag {
+  .orbit-node {
+    position: absolute;
+    width: 140px;
+    text-align: center;
+    z-index: 2;
+  }
+  .orbit-node .badge {
+    width: 50px; height: 50px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
     font-family: 'Instrument Serif', serif;
-    font-size: 10px;
-    color: var(--accent);
-    font-style: italic;
-    flex-shrink: 0;
-    width: 14px;
+    font-size: 20px;
   }
-  .risk-item strong {
+  .orbit-node .nm {
+    font-size: 15px;
     font-weight: 700;
+    letter-spacing: -0.01em;
   }
-  .risk-item span {
+  .orbit-node .ac {
+    font-size: 11px;
     color: var(--ink-muted);
+    margin-top: 2px;
+    line-height: 1.4;
   }
+  .node-resident { top: 50%; left: 0; transform: translateY(-50%); }
+  .node-tenant { top: 50%; right: 0; transform: translateY(-50%); }
+  .node-visitor { top: 0; left: 50%; transform: translateX(-50%); }
 
-  .next-item {
-    display: flex;
-    gap: 6px;
-    font-size: 8px;
-    line-height: 1.3;
-    padding: 2px 0;
-    align-items: flex-start;
+  /* ===== METRICS ===== */
+  .metrics-section {
+    padding: 80px 48px;
+    background: linear-gradient(180deg, var(--bg) 0%, #e8e3dc 100%);
   }
-  .next-item .box {
-    width: 9px; height: 9px;
-    border: 1.5px solid var(--ink);
-    border-radius: 2px;
-    flex-shrink: 0;
-    margin-top: 1px;
+  .metrics-wrap {
+    max-width: 1500px;
+    margin: 0 auto;
   }
-  .next-item strong { font-weight: 700; }
-  .next-item span { color: var(--ink-muted); }
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+  }
+  .metric {
+    border-top: 1px solid var(--ink);
+    padding-top: 20px;
+  }
+  .metric-val {
+    font-family: 'Instrument Serif', serif;
+    font-size: 58px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .metric-val .small { font-size: 0.5em; vertical-align: super; }
+  .metric-lbl {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    max-width: 200px;
+  }
 
   /* ===== FOOTER ===== */
-  .foot {
-    margin-top: 8px;
-    padding-top: 6px;
+  footer {
+    padding: 80px 48px 40px;
+    border-top: 1px solid var(--line);
+  }
+  .footer-grid {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-headline {
+    font-family: 'Instrument Serif', serif;
+    font-size: 42px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .footer-headline .italic { font-style: italic; color: var(--ink-muted); }
+  .footer-col h4 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .footer-col p, .footer-col li {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.7;
+    list-style: none;
+  }
+  .footer-base {
+    max-width: 1500px;
+    margin: 60px auto 0;
+    padding-top: 24px;
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
-    font-size: 7px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-
-  /* ===== MAP STYLES ===== */
-  .building-shadow { fill: rgba(10,10,10,0.08); }
-  .tower-side-1 { fill: #d6d0c8; }
-  .tower-side-2 { fill: #c3bdb5; }
-  .tower-top { fill: #ebe6df; }
-  .mall-side-1 { fill: #e8dcc8; }
-  .mall-side-2 { fill: #d4c5ad; }
-  .mall-top { fill: #f4ead8; }
-  .plaza { fill: #d4e8d4; }
-  .road { fill: #b8b0a4; }
-  .water { fill: #b8d4e0; }
-  .grass { fill: #c8e0c0; }
-  .window { fill: #6b7c8a; opacity: 0.7; }
-
-  .pin {
-    cursor: pointer;
-  }
-  .pin-pulse {
-    transform-origin: center;
-    animation: pinPulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pinPulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0; transform: scale(2.2); }
-  }
-  .pin-num {
-    font-family: 'Manrope', sans-serif;
     font-size: 11px;
-    font-weight: 700;
-    fill: #fff;
-    text-anchor: middle;
-    dominant-baseline: central;
-  }
-  .pin-label {
-    font-family: 'Manrope', sans-serif;
-    font-size: 8.5px;
-    font-weight: 700;
-    fill: var(--ink);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .pin-sublabel {
-    font-family: 'Instrument Serif', serif;
-    font-size: 10px;
-    font-style: italic;
-    fill: var(--ink-muted);
-  }
-  .leader-line {
-    stroke: var(--ink);
-    stroke-width: 0.6;
-    stroke-dasharray: 2 2;
-    fill: none;
+    color: var(--ink-soft);
   }
 
-  /* ===== PRINT ===== */
-  @page {
-    size: A4 landscape;
-    margin: 0;
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px) {
+    header { padding: 20px 24px; }
+    .header-meta { display: none; }
+    .site-nav-link { font-size: 12px; padding: 6px 14px; }
+    .hero { padding: 60px 24px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+    .hero-phone-wrap { height: 600px; }
+    .divider-section, .pillars-section, .loop-section, .metrics-section { padding-left: 24px; padding-right: 24px; }
+    .gallery-section { padding: 80px 24px; }
+    .pillars { grid-template-columns: 1fr 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; gap: 80px; }
+    .metrics-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    footer { padding: 60px 24px 30px; }
+    .orbit-ring { width: 340px; height: 340px; }
+    .loop-orbit { height: 420px; }
+    .orbit-node { width: 110px; }
+    .orbit-center { width: 140px; height: 140px; }
+    .orbit-center .lbl-lg { font-size: 22px; }
   }
-  @media print {
-    body {
-      padding: 0;
-      background: white;
-    }
-    .page {
-      box-shadow: none;
-      width: 297mm;
-      min-height: 210mm;
-      page-break-after: avoid;
-    }
-    .pin-pulse { animation: none; opacity: 0; }
+
+  /* Fade-in animation */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
   }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Phone subtle hover lift */
+  .phone {
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .screen-block:hover .phone { transform: translateY(-10px) rotate(-1deg); }
+
 </style>
 </head>
 <body>
 
-<div class="page">
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="brand">imperio<span class="brand-dot">.</span></div>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav-link active">Home</a>
+    <a href="roadmap.html" class="site-nav-link">Roadmap</a>
+  </nav>
+</header>
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="header-left">
-      <div class="brand">imperio<span class="brand-dot">.</span></div>
-      <h1>ConnectX · <span class="serif italic">Product Roadmap</span></h1>
-    </div>
-    <div class="header-right">
-      <div class="meta-line">
-        <span>Document <strong>v2.0</strong></span>
-        <span>Pilot <strong>The Tenz</strong></span>
-        <span>Owner <strong>Product · Imperio</strong></span>
-        <span>Date <strong>May 2026</strong></span>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow fade-up delay-1">
+        <span class="pulse"></span>
+        Concept Preview · The Tenz Pilot
       </div>
-      <span class="stamp">Internal · Confidential · Working Draft</span>
-    </div>
-  </div>
-
-  <!-- TOP STRIP -->
-  <div class="top-strip">
-    <div class="mission">
-      <div class="label">North Star</div>
-      <div class="text">Make The Tenz the most <span class="italic">effortlessly connected</span> place to live in KL — then scale the operating system across every Imperio development.</div>
-      <div class="sub">Win residents first · Earn tenant value · Compound through data · Built and owned in-house.</div>
-    </div>
-    <div class="decisions">
-      <div class="label">Strategic decisions · Locked</div>
-      <div class="dec-grid">
-        <div class="dec"><span class="n">1</span><div><strong>Owned, not licensed</strong> · <span>Imperio developments only</span></div></div>
-        <div class="dec"><span class="n">2</span><div><strong>Imperio funds points</strong> · <span>Subsidised initially; revisit Phase 3</span></div></div>
-        <div class="dec"><span class="n">3</span><div><strong>Two front-ends</strong> · <span>Native app for residents · PWA for visitors</span></div></div>
-        <div class="dec"><span class="n">4</span><div><strong>Wedge: convenience</strong> · <span>Daily resident utility before commerce</span></div></div>
-        <div class="dec"><span class="n">5</span><div><strong>Build the engine</strong> · <span>Decision revisited end of Phase 2</span></div></div>
-        <div class="dec"><span class="n">6</span><div><strong>Pilot The Tenz</strong> · <span>Aman Cove &amp; Midtown follow proof</span></div></div>
+      <h1 class="fade-up delay-2">
+        One app.<br>
+        <span class="serif italic">Three communities.</span><br>
+        One township.
+      </h1>
+      <p class="hero-sub fade-up delay-3">
+        ConnectX brings residents, tenants and visitors into a single intelligent ecosystem — turning daily interactions into engagement, loyalty, and measurable growth for your development.
+      </p>
+      <div class="hero-meta fade-up delay-4">
+        <div><span>Client</span><span>Imperio Properties</span></div>
+        <div><span>Pilot Site</span><span>The Tenz</span></div>
+        <div><span>Platform</span><span>iOS · Android · Web</span></div>
       </div>
     </div>
+    <div class="hero-phone-wrap">
+      <div class="hero-glow"></div>
+      <div class="phone fade-up delay-3">
+        <div class="phone-screen">
+          <div class="notch"></div>
+          <div class="screen-welcome">
+            <div class="status-bar"><span>9:41</span><span class="icons">●●● ◐ ◼</span></div>
+            <div class="welcome-top">
+              <div class="welcome-brand">imperio<span class="dot">.</span></div>
+              <div class="tenz-logo">the tenz</div>
+            </div>
+
+            <div class="welcome-greet">Good morning</div>
+            <div class="welcome-name">Mr. Lee, <span class="italic">welcome home.</span></div>
+            <div class="welcome-prompt">How can we make today simpler for you?</div>
+
+            <div class="quick-card-row">
+              <div class="qcard">
+                <div class="label">Loyalty</div>
+                <div class="value">2,840 pts</div>
+                <div class="delta">+120 this week</div>
+              </div>
+              <div class="qcard">
+                <div class="label">This month</div>
+                <div class="value">RM 1,240</div>
+                <div class="delta">Spent in mall</div>
+              </div>
+            </div>
+
+            <div class="nav-pill">
+              <div class="nav-item active">Home</div>
+              <div class="nav-item">Live</div>
+              <div class="nav-item">Shop</div>
+              <div class="nav-item">Me</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PILLARS ===== -->
+<section class="divider-section">
+  <div class="divider-line">
+    <span class="num">01</span>
+    <span class="label">Foundation · The four pillars</span>
+    <hr>
+  </div>
+  <h2 class="section-title">A behaviour-driven system, <span class="serif italic">not just an app.</span></h2>
+  <p class="section-sub">Every screen, every notification, every tap is engineered to nudge meaningful action across four interlocking pillars.</p>
+</section>
+
+<section class="pillars-section">
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12L12 4l9 8"/><path d="M5 10v10h14V10"/></svg>
+      </div>
+      <h3>Living</h3>
+      <p>Payment, access, facility booking, in-home services and the property documents that matter — all in one tap.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16l-1.5 12a2 2 0 01-2 1.8H7.5a2 2 0 01-2-1.8L4 7z"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>
+      </div>
+      <h3>Commerce</h3>
+      <p>Tenant campaigns, QR-scan promotions, mall directory and a discovery feed that turns footfall into transactions.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M14 20c0-2 2-4 5-4"/></svg>
+      </div>
+      <h3>Engagement</h3>
+      <p>Community events, neighbour-to-neighbour interactions, announcements, and a feed that makes the place feel alive.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.6 6.3L21 9l-5 4.5L17.5 21 12 17.5 6.5 21 8 13.5 3 9l6.4-0.7L12 2z"/></svg>
+      </div>
+      <h3>Loyalty</h3>
+      <p>One points engine across every tenant. Earn living, spend visiting — building cross-merchant value that rewards return.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCREEN GALLERY (dark) ===== -->
+<section class="gallery-section">
+  <div class="divider-line" style="max-width: 1500px; margin: 0 auto;">
+    <span class="num">02</span>
+    <span class="label">Screens · The product, made visible</span>
+    <hr>
+  </div>
+  <div style="max-width: 1500px; margin: 24px auto 0;">
+    <h2 class="section-title">Six interfaces. <span class="serif italic">One ecosystem.</span></h2>
+    <p class="section-sub">A peek at how each persona experiences ConnectX — designed to feel premium, calm, and effortlessly familiar.</p>
   </div>
 
-  <!-- TOWNSHIP MAP -->
-  <div class="map-section">
-    <div class="section-head">
-      <span class="num">01</span>
-      <span class="title">The Tenz · <span class="serif">where each phase lives</span></span>
+  <div class="gallery-grid">
+
+    <!-- SCREEN 1 — DISCOVER / COMMERCE -->
+    <div class="screen-block">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="notch"></div>
+          <div class="scr">
+            <div class="status-bar"><span>9:41</span><span class="icons">●●● ◐ ◼</span></div>
+            <div class="scr-head" style="margin-top: 6px;">
+              <div class="menu">☰</div>
+              <div class="avatar"></div>
+            </div>
+            <div class="scr-sub-sm">Discover · The Tenz Mall</div>
+            <div class="scr-title-xl">What's <span class="italic">on</span> today.</div>
+            <div class="search-bar" style="margin-top: 14px;">
+              <span>⌕</span> Search shops, food, services…
+            </div>
+            <div class="filter-chips">
+              <div class="chip active">All</div>
+              <div class="chip">F&B</div>
+              <div class="chip">Retail</div>
+              <div class="chip">Wellness</div>
+            </div>
+            <div class="promo-card p2">
+              <div class="promo-tag">FEATURED · TODAY ONLY</div>
+              <div class="promo-title">Dom's Subs<br>1-for-1 lunch</div>
+              <div class="promo-meta">
+                <span>Ground floor · Unit 04</span>
+                <span class="promo-points">+50 pts</span>
+              </div>
+            </div>
+            <div class="shop-row">
+              <div class="shop-mini">
+                <div class="shop-thumb" style="background: linear-gradient(135deg, #f5d7c2, #e89a76);"></div>
+                <div class="shop-name">Pie Haus</div>
+                <div class="shop-cat">Cafe · L1</div>
+              </div>
+              <div class="shop-mini">
+                <div class="shop-thumb" style="background: linear-gradient(135deg, #c8d8c5, #7a9c75);"></div>
+                <div class="shop-name">Curated by</div>
+                <div class="shop-cat">Retail · L2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-meta">
+        <div class="screen-tag">Visitor · Commerce</div>
+        <div class="screen-title">Discover</div>
+        <div class="screen-desc">Every tenant promotion, surfaced where it converts — with built-in points to drive the next visit.</div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2 — LIVING / RESIDENT -->
+    <div class="screen-block">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="notch"></div>
+          <div class="scr">
+            <div class="status-bar"><span>9:41</span><span class="icons">●●● ◐ ◼</span></div>
+            <div class="scr-head" style="margin-top: 6px;">
+              <div class="menu">☰</div>
+              <div class="avatar"></div>
+            </div>
+            <div class="scr-sub-sm">Your home · Tower A · #12-08</div>
+            <div class="scr-title-xl">Everything, <span class="italic">in reach.</span></div>
+            <div class="living-grid" style="margin-top: 14px;">
+              <div class="live-tile feature">
+                <div class="live-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                </div>
+                <div>
+                  <div class="live-label">Tap to unlock the gym</div>
+                  <div class="live-sub">Access valid until 21:00</div>
+                </div>
+              </div>
+              <div class="live-tile">
+                <div class="live-icon">$</div>
+                <div>
+                  <div class="live-label">Maintenance</div>
+                  <div class="live-sub">RM 320 · Due 28th</div>
+                </div>
+              </div>
+              <div class="live-tile">
+                <div class="live-icon">⌖</div>
+                <div>
+                  <div class="live-label">Visitor pass</div>
+                  <div class="live-sub">Issue QR</div>
+                </div>
+              </div>
+              <div class="live-tile">
+                <div class="live-icon">▢</div>
+                <div>
+                  <div class="live-label">Book facility</div>
+                  <div class="live-sub">BBQ · Pool · Hall</div>
+                </div>
+              </div>
+              <div class="live-tile">
+                <div class="live-icon">✱</div>
+                <div>
+                  <div class="live-label">Services</div>
+                  <div class="live-sub">Cleaning · Pest</div>
+                </div>
+              </div>
+            </div>
+            <div class="scr-sub-sm" style="margin: 14px 0 4px;">Recent</div>
+            <div class="activity-row">
+              <div class="act-icon">✓</div>
+              <div class="act-info">
+                <div class="act-name">Pool booked · Sat 4pm</div>
+                <div class="act-time">2 hours ago</div>
+              </div>
+              <div class="act-status">Confirmed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-meta">
+        <div class="screen-tag">Resident · Living</div>
+        <div class="screen-title">Home Hub</div>
+        <div class="screen-desc">Access, payment, bookings, services — collapsed into a single, calm surface that residents return to daily.</div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3 — LOYALTY / REWARDS -->
+    <div class="screen-block">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="notch"></div>
+          <div class="scr">
+            <div class="status-bar"><span>9:41</span><span class="icons">●●● ◐ ◼</span></div>
+            <div class="scr-head" style="margin-top: 6px;">
+              <div class="menu">☰</div>
+              <div class="avatar"></div>
+            </div>
+            <div class="scr-sub-sm">Loyalty · ConnectX Points</div>
+            <div class="scr-title-xl">Your <span class="italic">balance.</span></div>
+
+            <div class="loyalty-hero" style="margin-top: 14px;">
+              <div class="loyalty-tier">Gold member</div>
+              <div class="loyalty-points">2,840</div>
+              <div class="loyalty-points-lbl">Points available</div>
+              <div class="progress-bar"><div class="progress-fill"></div></div>
+              <div class="progress-lbl">
+                <span>1,160 to Platinum</span>
+                <span>68%</span>
+              </div>
+            </div>
+
+            <div class="scr-sub-sm" style="margin-bottom: 4px;">Redeem</div>
+            <div class="reward-item">
+              <div class="reward-thumb"></div>
+              <div class="reward-info">
+                <div class="reward-name">Free coffee</div>
+                <div class="reward-merch">Pie Haus</div>
+              </div>
+              <div class="reward-cost">200 pts</div>
+            </div>
+            <div class="reward-item">
+              <div class="reward-thumb r2"></div>
+              <div class="reward-info">
+                <div class="reward-name">15% off groceries</div>
+                <div class="reward-merch">Curated by · L2</div>
+              </div>
+              <div class="reward-cost">450 pts</div>
+            </div>
+            <div class="reward-item">
+              <div class="reward-thumb r3"></div>
+              <div class="reward-info">
+                <div class="reward-name">Spa day pass</div>
+                <div class="reward-merch">Wellness · L3</div>
+              </div>
+              <div class="reward-cost">1,800 pts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-meta">
+        <div class="screen-tag">All Users · Loyalty</div>
+        <div class="screen-title">Rewards</div>
+        <div class="screen-desc">One universal points engine. Earn living, spend visiting — the engine that compounds engagement across tenants.</div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4 — TENANT DASHBOARD (B2B) -->
+    <div class="screen-block">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="notch"></div>
+          <div class="scr scr-dark">
+            <div class="status-bar" style="color: #fff;"><span>9:41</span><span class="icons">●●● ◐ ◼</span></div>
+            <div class="scr-head" style="margin-top: 6px;">
+              <div class="menu">☰</div>
+              <div class="avatar"></div>
+            </div>
+            <div class="scr-sub-sm">Tenant Portal · Dom's Subs</div>
+            <div class="scr-title-xl">Today, <span style="color: rgba(255,255,255,0.5); font-style: italic;">at a glance.</span></div>
+
+            <div class="stat-card gradient" style="margin-top: 14px;">
+              <div class="stat-lbl">Footfall · 24h</div>
+              <div class="stat-row">
+                <div>
+                  <div class="stat-val">312</div>
+                  <div class="stat-delta">↑ 23% vs last Tue</div>
+                </div>
+                <div class="chart-bars">
+                  <div class="bar med" style="height: 30%"></div>
+                  <div class="bar med" style="height: 50%"></div>
+                  <div class="bar hi" style="height: 70%"></div>
+                  <div class="bar med" style="height: 45%"></div>
+                  <div class="bar hi" style="height: 90%"></div>
+                  <div class="bar hi" style="height: 85%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-lbl">Campaign performance</div>
+              <div class="campaign-card" style="margin: 8px 0 0; padding: 8px 0; background: transparent;">
+                <div class="camp-dot"></div>
+                <div class="camp-info">
+                  <div class="camp-title">1-for-1 lunch</div>
+                  <div class="camp-meta">Live · 142 redemptions</div>
+                </div>
+                <div class="camp-val">RM 3,840</div>
+              </div>
+              <div class="campaign-card" style="margin: 0; padding: 8px 0; background: transparent; border-top: 1px solid rgba(255,255,255,0.06);">
+                <div class="camp-dot warn"></div>
+                <div class="camp-info">
+                  <div class="camp-title">Happy Hour 4-6pm</div>
+                  <div class="camp-meta">Scheduled · Fri</div>
+                </div>
+                <div class="camp-val">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-meta">
+        <div class="screen-tag">Tenant · Business</div>
+        <div class="screen-title">Tenant Console</div>
+        <div class="screen-desc">Live footfall, redemption tracking, and campaign ROI — the proof tenants need to keep investing in the ecosystem.</div>
+      </div>
+    </div>
+
+    <!-- SCREEN 5 — COMMUNITY / EVENTS -->
+    <div class="screen-block">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="notch"></div>
+          <div class="scr">
+            <div class="status-bar"><span>9:41</span><span class="icons">●●● ◐ ◼</span></div>
+            <div class="scr-head" style="margin-top: 6px;">
+              <div class="menu">☰</div>
+              <div class="avatar"></div>
+            </div>
+            <div class="scr-sub-sm">Community · This week</div>
+            <div class="scr-title-xl">Gather, <span class="italic">together.</span></div>
+
+            <div class="event-feat" style="margin-top: 14px;">
+              <div class="event-tag">FEATURED EVENT · SAT 18:00</div>
+              <div class="event-title">Sunset<br>Yoga at<br>the Deck</div>
+              <div class="event-meta">
+                <span>● Rooftop Garden</span>
+                <span>● 12 going</span>
+              </div>
+            </div>
+
+            <div class="scr-sub-sm" style="margin-bottom: 4px;">Upcoming</div>
+            <div class="event-list-item">
+              <div class="event-date">
+                <div class="day">24</div>
+                <div class="mo">May</div>
+              </div>
+              <div class="event-info">
+                <div class="t">Farmers' Market</div>
+                <div class="l">Plaza · 9am–2pm</div>
+              </div>
+            </div>
+            <div class="event-list-item">
+              <div class="event-date">
+                <div class="day">28</div>
+                <div class="mo">May</div>
+              </div>
+              <div class="event-info">
+                <div class="t">Kids' Art Workshop</div>
+                <div class="l">Community Hall · Free</div>
+              </div>
+            </div>
+            <div class="event-list-item">
+              <div class="event-date">
+                <div class="day">02</div>
+                <div class="mo">Jun</div>
+              </div>
+              <div class="event-info">
+                <div class="t">Movie Night: Drive-In</div>
+                <div class="l">Lot 7 · 8pm · +30 pts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-meta">
+        <div class="screen-tag">All Users · Engagement</div>
+        <div class="screen-title">Community</div>
+        <div class="screen-desc">Events that make residents stay, visitors return, and tenants benefit from organic foot traffic.</div>
+      </div>
+    </div>
+
+    <!-- SCREEN 6 — VISITOR QR / PAY -->
+    <div class="screen-block">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="notch"></div>
+          <div class="scr qr-screen">
+            <div class="status-bar" style="color: #fff;"><span>9:41</span><span class="icons">●●● ◐ ◼</span></div>
+            <div class="scr-head" style="margin-top: 6px;">
+              <div class="menu">☰</div>
+              <div class="avatar"></div>
+            </div>
+            <div class="scr-sub-sm" style="color: rgba(255,255,255,0.5);">Pay · Earn · Redeem</div>
+            <div class="scr-title-xl">Scan to <span style="color: rgba(255,255,255,0.5); font-style: italic;">earn.</span></div>
+
+            <div class="qr-card">
+              <div class="qr-visual"></div>
+              <div class="qr-name">Mr. Lee Chen Wei</div>
+              <div class="qr-id">ID · TENZ-04829</div>
+            </div>
+
+            <div class="visitor-perk">
+              <div class="perk-icon">★</div>
+              <div class="perk-text">
+                <div class="perk-t">Earn 2x points today</div>
+                <div class="perk-s">Weekend bonus · All tenants</div>
+              </div>
+            </div>
+            <div class="visitor-perk">
+              <div class="perk-icon b2">↻</div>
+              <div class="perk-text">
+                <div class="perk-t">3 unused vouchers</div>
+                <div class="perk-s">Expiring this month</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-meta">
+        <div class="screen-tag">Visitor · Identity</div>
+        <div class="screen-title">Scan & Earn</div>
+        <div class="screen-desc">One QR for entry, payment, points, and identity — the connective tissue that ties every interaction to the ecosystem.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== ECOSYSTEM LOOP ===== -->
+<section class="loop-section">
+  <div class="divider-line">
+    <span class="num">03</span>
+    <span class="label">How the loop works</span>
+    <hr>
+  </div>
+  <h2 class="section-title">Loyalty is <span class="serif italic">the gravity</span> that holds it together.</h2>
+  <p class="section-sub">Residents use, visitors spend, tenants serve. Every action drops a point into a shared engine — and the engine pulls each persona back.</p>
+
+  <div class="loop-canvas">
+    <div class="loop-orbit">
+      <div class="orbit-ring"></div>
+      <div class="orbit-center">
+        <div class="lbl-sm">The engine</div>
+        <div class="lbl-lg">Loyalty</div>
+        <div class="lbl-tg">Points · Rewards · Data</div>
+      </div>
+      <div class="orbit-node node-visitor">
+        <div class="badge">V</div>
+        <div class="nm">Visitor</div>
+        <div class="ac">Spend → earn points</div>
+      </div>
+      <div class="orbit-node node-resident">
+        <div class="badge">R</div>
+        <div class="nm">Resident</div>
+        <div class="ac">Use → daily engagement</div>
+      </div>
+      <div class="orbit-node node-tenant">
+        <div class="badge">T</div>
+        <div class="nm">Tenant</div>
+        <div class="ac">Campaign → traffic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METRICS ===== -->
+<section class="metrics-section">
+  <div class="metrics-wrap">
+    <div class="divider-line">
+      <span class="num">04</span>
+      <span class="label">Scale projection · Illustrative</span>
       <hr>
-      <span class="note">Isometric reference · Not to scale</span>
     </div>
-    <div class="map-canvas">
-      <svg class="map-svg" viewBox="0 0 1080 320" xmlns="http://www.w3.org/2000/svg">
+    <h2 class="section-title">From The Tenz <span class="serif italic">to the ecosystem.</span></h2>
+    <p class="section-sub">Value doesn't grow linearly — it compounds as more developments, tenants, and users join the network.</p>
 
-        <!-- BASE GROUND -->
-        <rect x="0" y="0" width="1080" height="320" fill="transparent"/>
-
-        <!-- ROAD GRID (isometric) -->
-        <polygon points="60,220 540,140 1020,220 540,300" class="road" opacity="0.5"/>
-        <polygon points="540,140 540,300 540,300 540,140" stroke="#a89e8f" stroke-width="0.5" fill="none"/>
-
-        <!-- GRASS / PLAZA -->
-        <polygon points="380,180 540,140 700,180 540,220" class="plaza"/>
-
-        <!-- TREES -->
-        <g opacity="0.7">
-          <circle cx="200" cy="200" r="6" fill="#7aa97a"/>
-          <circle cx="220" cy="195" r="5" fill="#8bb88b"/>
-          <circle cx="880" cy="200" r="6" fill="#7aa97a"/>
-          <circle cx="860" cy="195" r="5" fill="#8bb88b"/>
-          <circle cx="490" cy="170" r="4" fill="#8bb88b"/>
-          <circle cx="590" cy="170" r="4" fill="#8bb88b"/>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- TOWER A (LEFT) - Phase 1 Resident Living -->
-        <!-- ============================================ -->
-        <g id="tower-a">
-          <!-- shadow -->
-          <polygon points="160,180 240,180 250,195 150,195" class="building-shadow"/>
-          <!-- right side -->
-          <polygon points="220,60 240,70 240,180 220,170" class="tower-side-2"/>
-          <!-- front side -->
-          <polygon points="160,60 220,60 220,170 160,180" class="tower-side-1"/>
-          <!-- top -->
-          <polygon points="160,60 220,60 240,70 180,70" class="tower-top"/>
-          <!-- windows -->
-          <g class="window">
-            <rect x="167" y="75" width="6" height="4"/>
-            <rect x="178" y="75" width="6" height="4"/>
-            <rect x="189" y="75" width="6" height="4"/>
-            <rect x="200" y="75" width="6" height="4"/>
-            <rect x="211" y="75" width="6" height="4"/>
-            <rect x="167" y="90" width="6" height="4"/>
-            <rect x="178" y="90" width="6" height="4"/>
-            <rect x="189" y="90" width="6" height="4"/>
-            <rect x="200" y="90" width="6" height="4"/>
-            <rect x="211" y="90" width="6" height="4"/>
-            <rect x="167" y="105" width="6" height="4"/>
-            <rect x="178" y="105" width="6" height="4"/>
-            <rect x="189" y="105" width="6" height="4"/>
-            <rect x="200" y="105" width="6" height="4"/>
-            <rect x="211" y="105" width="6" height="4"/>
-            <rect x="167" y="120" width="6" height="4"/>
-            <rect x="178" y="120" width="6" height="4"/>
-            <rect x="189" y="120" width="6" height="4"/>
-            <rect x="200" y="120" width="6" height="4"/>
-            <rect x="211" y="120" width="6" height="4"/>
-            <rect x="167" y="135" width="6" height="4"/>
-            <rect x="178" y="135" width="6" height="4"/>
-            <rect x="189" y="135" width="6" height="4"/>
-            <rect x="200" y="135" width="6" height="4"/>
-            <rect x="211" y="135" width="6" height="4"/>
-            <rect x="167" y="150" width="6" height="4"/>
-            <rect x="178" y="150" width="6" height="4"/>
-            <rect x="189" y="150" width="6" height="4"/>
-            <rect x="200" y="150" width="6" height="4"/>
-            <rect x="211" y="150" width="6" height="4"/>
-          </g>
-          <!-- side window detail -->
-          <g class="window">
-            <rect x="225" y="80" width="3" height="4"/>
-            <rect x="232" y="83" width="3" height="4"/>
-            <rect x="225" y="95" width="3" height="4"/>
-            <rect x="232" y="98" width="3" height="4"/>
-            <rect x="225" y="110" width="3" height="4"/>
-            <rect x="232" y="113" width="3" height="4"/>
-            <rect x="225" y="125" width="3" height="4"/>
-            <rect x="232" y="128" width="3" height="4"/>
-            <rect x="225" y="140" width="3" height="4"/>
-            <rect x="232" y="143" width="3" height="4"/>
-          </g>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- TOWER B (LEFT-CENTER) -->
-        <!-- ============================================ -->
-        <g id="tower-b">
-          <polygon points="285,170 355,170 365,182 275,182" class="building-shadow"/>
-          <polygon points="340,80 355,88 355,170 340,162" class="tower-side-2"/>
-          <polygon points="285,80 340,80 340,162 285,170" class="tower-side-1"/>
-          <polygon points="285,80 340,80 355,88 300,88" class="tower-top"/>
-          <g class="window">
-            <rect x="291" y="95" width="5" height="4"/>
-            <rect x="301" y="95" width="5" height="4"/>
-            <rect x="311" y="95" width="5" height="4"/>
-            <rect x="321" y="95" width="5" height="4"/>
-            <rect x="331" y="95" width="5" height="4"/>
-            <rect x="291" y="108" width="5" height="4"/>
-            <rect x="301" y="108" width="5" height="4"/>
-            <rect x="311" y="108" width="5" height="4"/>
-            <rect x="321" y="108" width="5" height="4"/>
-            <rect x="331" y="108" width="5" height="4"/>
-            <rect x="291" y="121" width="5" height="4"/>
-            <rect x="301" y="121" width="5" height="4"/>
-            <rect x="311" y="121" width="5" height="4"/>
-            <rect x="321" y="121" width="5" height="4"/>
-            <rect x="331" y="121" width="5" height="4"/>
-            <rect x="291" y="134" width="5" height="4"/>
-            <rect x="301" y="134" width="5" height="4"/>
-            <rect x="311" y="134" width="5" height="4"/>
-            <rect x="321" y="134" width="5" height="4"/>
-            <rect x="331" y="134" width="5" height="4"/>
-            <rect x="291" y="147" width="5" height="4"/>
-            <rect x="301" y="147" width="5" height="4"/>
-            <rect x="311" y="147" width="5" height="4"/>
-            <rect x="321" y="147" width="5" height="4"/>
-            <rect x="331" y="147" width="5" height="4"/>
-          </g>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- MALL / RETAIL PODIUM (CENTER) - Phase 2 Commerce -->
-        <!-- ============================================ -->
-        <g id="mall">
-          <polygon points="425,235 695,235 715,255 405,255" class="building-shadow"/>
-          <!-- right side -->
-          <polygon points="660,195 695,215 695,235 660,225" class="mall-side-2"/>
-          <!-- front side -->
-          <polygon points="425,195 660,195 660,225 425,235" class="mall-side-1"/>
-          <!-- top -->
-          <polygon points="425,195 660,195 695,215 460,215" class="mall-top"/>
-          <!-- storefront divisions -->
-          <g stroke="#a89878" stroke-width="0.4" fill="none">
-            <line x1="460" y1="195" x2="450" y2="235"/>
-            <line x1="495" y1="195" x2="485" y2="235"/>
-            <line x1="530" y1="195" x2="520" y2="235"/>
-            <line x1="565" y1="195" x2="555" y2="235"/>
-            <line x1="600" y1="195" x2="590" y2="235"/>
-            <line x1="635" y1="195" x2="625" y2="235"/>
-          </g>
-          <!-- windows / signage -->
-          <g fill="#c98a00" opacity="0.5">
-            <rect x="437" y="218" width="20" height="3"/>
-            <rect x="472" y="218" width="20" height="3"/>
-            <rect x="507" y="218" width="20" height="3"/>
-            <rect x="542" y="218" width="20" height="3"/>
-            <rect x="577" y="218" width="20" height="3"/>
-            <rect x="612" y="218" width="20" height="3"/>
-          </g>
-          <!-- mall entrance arch -->
-          <rect x="540" y="222" width="14" height="13" fill="#3a3530"/>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- TOWER C (RIGHT-CENTER) -->
-        <!-- ============================================ -->
-        <g id="tower-c">
-          <polygon points="730,170 800,170 810,182 720,182" class="building-shadow"/>
-          <polygon points="785,80 800,88 800,170 785,162" class="tower-side-2"/>
-          <polygon points="730,80 785,80 785,162 730,170" class="tower-side-1"/>
-          <polygon points="730,80 785,80 800,88 745,88" class="tower-top"/>
-          <g class="window">
-            <rect x="736" y="95" width="5" height="4"/>
-            <rect x="746" y="95" width="5" height="4"/>
-            <rect x="756" y="95" width="5" height="4"/>
-            <rect x="766" y="95" width="5" height="4"/>
-            <rect x="776" y="95" width="5" height="4"/>
-            <rect x="736" y="108" width="5" height="4"/>
-            <rect x="746" y="108" width="5" height="4"/>
-            <rect x="756" y="108" width="5" height="4"/>
-            <rect x="766" y="108" width="5" height="4"/>
-            <rect x="776" y="108" width="5" height="4"/>
-            <rect x="736" y="121" width="5" height="4"/>
-            <rect x="746" y="121" width="5" height="4"/>
-            <rect x="756" y="121" width="5" height="4"/>
-            <rect x="766" y="121" width="5" height="4"/>
-            <rect x="776" y="121" width="5" height="4"/>
-            <rect x="736" y="134" width="5" height="4"/>
-            <rect x="746" y="134" width="5" height="4"/>
-            <rect x="756" y="134" width="5" height="4"/>
-            <rect x="766" y="134" width="5" height="4"/>
-            <rect x="776" y="134" width="5" height="4"/>
-            <rect x="736" y="147" width="5" height="4"/>
-            <rect x="746" y="147" width="5" height="4"/>
-            <rect x="756" y="147" width="5" height="4"/>
-            <rect x="766" y="147" width="5" height="4"/>
-            <rect x="776" y="147" width="5" height="4"/>
-          </g>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- TOWER D (RIGHT) - Aman Cove / Midtown stand-in -->
-        <!-- ============================================ -->
-        <g id="tower-d" opacity="0.55">
-          <polygon points="850,200 920,200 930,212 840,212" class="building-shadow"/>
-          <polygon points="905,120 920,128 920,200 905,192" class="tower-side-2"/>
-          <polygon points="850,120 905,120 905,192 850,200" class="tower-side-1"/>
-          <polygon points="850,120 905,120 920,128 865,128" class="tower-top"/>
-          <g class="window">
-            <rect x="856" y="135" width="5" height="4"/>
-            <rect x="866" y="135" width="5" height="4"/>
-            <rect x="876" y="135" width="5" height="4"/>
-            <rect x="886" y="135" width="5" height="4"/>
-            <rect x="896" y="135" width="5" height="4"/>
-            <rect x="856" y="148" width="5" height="4"/>
-            <rect x="866" y="148" width="5" height="4"/>
-            <rect x="876" y="148" width="5" height="4"/>
-            <rect x="886" y="148" width="5" height="4"/>
-            <rect x="896" y="148" width="5" height="4"/>
-            <rect x="856" y="161" width="5" height="4"/>
-            <rect x="866" y="161" width="5" height="4"/>
-            <rect x="876" y="161" width="5" height="4"/>
-            <rect x="886" y="161" width="5" height="4"/>
-            <rect x="896" y="161" width="5" height="4"/>
-            <rect x="856" y="174" width="5" height="4"/>
-            <rect x="866" y="174" width="5" height="4"/>
-            <rect x="876" y="174" width="5" height="4"/>
-            <rect x="886" y="174" width="5" height="4"/>
-            <rect x="896" y="174" width="5" height="4"/>
-          </g>
-        </g>
-        <text x="885" y="225" text-anchor="middle" font-family="Manrope" font-size="7" fill="#9a9a9a" font-style="italic">future · Aman Cove</text>
-
-        <!-- ============================================ -->
-        <!-- POOL / FACILITIES (front, between towers) -->
-        <!-- ============================================ -->
-        <g id="pool">
-          <ellipse cx="265" cy="200" rx="32" ry="12" class="water"/>
-          <ellipse cx="265" cy="198" rx="28" ry="8" fill="#d0e4ec" opacity="0.6"/>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- PLAZA / EVENT SPACE -->
-        <!-- ============================================ -->
-        <g id="plaza">
-          <polygon points="380,180 540,140 540,150 380,190" fill="#e8d8c0" opacity="0.5"/>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- GUARD HOUSE / ENTRY (far left) -->
-        <!-- ============================================ -->
-        <g id="guardhouse">
-          <polygon points="80,235 110,235 115,240 75,240" class="building-shadow"/>
-          <polygon points="105,215 115,220 115,235 105,230" class="tower-side-2"/>
-          <polygon points="80,215 105,215 105,230 80,235" class="tower-side-1"/>
-          <polygon points="80,215 105,215 115,220 90,220" class="tower-top"/>
-        </g>
-
-        <!-- ============================================ -->
-        <!-- PHASE PINS WITH LEADER LINES -->
-        <!-- ============================================ -->
-
-        <!-- PIN 0 - Phase 0 - Guard house / entrance (foundation, pre-launch) -->
-        <g class="pin">
-          <line class="leader-line" x1="95" y1="225" x2="60" y2="265"/>
-          <circle class="pin-pulse" cx="95" cy="225" r="8" fill="#8c8c8c"/>
-          <circle cx="95" cy="225" r="9" fill="#8c8c8c" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="95" y="225">0</text>
-          <text class="pin-label" x="60" y="278">Phase 0</text>
-          <text class="pin-sublabel" x="60" y="290">prep · scan</text>
-        </g>
-
-        <!-- PIN 1 - Phase 1 - Tower A & B (resident living, access, payment) -->
-        <g class="pin">
-          <line class="leader-line" x1="190" y1="105" x2="155" y2="40"/>
-          <circle class="pin-pulse" cx="190" cy="105" r="8" fill="#6d4eff"/>
-          <circle cx="190" cy="105" r="10" fill="#6d4eff" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="190" y="105">1</text>
-          <text class="pin-label" x="155" y="30">Phase 1</text>
-          <text class="pin-sublabel" x="155" y="42">resident MVP</text>
-        </g>
-
-        <!-- PIN 1b - Phase 1 - Pool / facilities (booking) -->
-        <g class="pin">
-          <line class="leader-line" x1="265" y1="200" x2="265" y2="245"/>
-          <circle class="pin-pulse" cx="265" cy="200" r="7" fill="#6d4eff"/>
-          <circle cx="265" cy="200" r="8" fill="#6d4eff" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="265" y="200" style="font-size: 9px;">1</text>
-        </g>
-
-        <!-- PIN 2 - Phase 2 - Mall (commerce, tenants, visitors) -->
-        <g class="pin">
-          <line class="leader-line" x1="540" y1="210" x2="540" y2="262"/>
-          <circle class="pin-pulse" cx="540" cy="210" r="9" fill="#ff8b6b"/>
-          <circle cx="540" cy="210" r="11" fill="#ff8b6b" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="540" y="210">2</text>
-          <text class="pin-label" x="540" y="278" text-anchor="middle">Phase 2</text>
-          <text class="pin-sublabel" x="540" y="290" text-anchor="middle">commerce &amp; visitor PWA</text>
-        </g>
-
-        <!-- PIN 2b - additional storefront pin -->
-        <g class="pin">
-          <line class="leader-line" x1="460" y1="218" x2="455" y2="262"/>
-          <circle class="pin-pulse" cx="460" cy="218" r="6" fill="#ff8b6b"/>
-          <circle cx="460" cy="218" r="7" fill="#ff8b6b" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="460" y="218" style="font-size: 8px;">2</text>
-        </g>
-
-        <!-- PIN 3 - Phase 3 - Plaza (loyalty engine = ecosystem center) -->
-        <g class="pin">
-          <line class="leader-line" x1="540" y1="160" x2="540" y2="105"/>
-          <circle class="pin-pulse" cx="540" cy="160" r="9" fill="#2f9a5e"/>
-          <circle cx="540" cy="160" r="11" fill="#2f9a5e" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="540" y="160">3</text>
-          <text class="pin-label" x="540" y="90" text-anchor="middle">Phase 3</text>
-          <text class="pin-sublabel" x="540" y="102" text-anchor="middle">loyalty engine</text>
-        </g>
-
-        <!-- PIN 3b - Tower C (resident-tenant cross-traffic) -->
-        <g class="pin">
-          <line class="leader-line" x1="760" y1="125" x2="800" y2="60"/>
-          <circle class="pin-pulse" cx="760" cy="125" r="7" fill="#2f9a5e"/>
-          <circle cx="760" cy="125" r="8" fill="#2f9a5e" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="760" y="125" style="font-size: 9px;">3</text>
-        </g>
-
-        <!-- PIN 4 - Phase 4 - Tower D (network expansion, intelligence) -->
-        <g class="pin">
-          <line class="leader-line" x1="885" y1="155" x2="965" y2="65"/>
-          <circle class="pin-pulse" cx="885" cy="155" r="9" fill="#c98a00"/>
-          <circle cx="885" cy="155" r="11" fill="#c98a00" stroke="#fff" stroke-width="1.5"/>
-          <text class="pin-num" x="885" y="155">4</text>
-          <text class="pin-label" x="970" y="55">Phase 4</text>
-          <text class="pin-sublabel" x="970" y="67">scale · AI · network</text>
-        </g>
-
-        <!-- WAYFINDING LABEL OVERLAYS -->
-        <text x="190" y="195" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">TOWER A</text>
-        <text x="312" y="195" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">TOWER B</text>
-        <text x="540" y="248" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">THE TENZ MALL</text>
-        <text x="757" y="195" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">TOWER C</text>
-        <text x="265" y="220" text-anchor="middle" font-family="Manrope" font-size="6" fill="#5e5e5e" font-style="italic">facilities</text>
-        <text x="460" y="170" text-anchor="middle" font-family="Manrope" font-size="6" fill="#5e5e5e" font-style="italic">plaza · events</text>
-        <text x="93" y="252" text-anchor="middle" font-family="Manrope" font-size="6" fill="#5e5e5e" font-style="italic">guard · entry</text>
-
-      </svg>
-
-      <!-- LEGEND -->
-      <div class="map-legend">
-        <div class="legend-title">Phase indicators</div>
-        <div class="legend-item"><span class="legend-dot" style="background: var(--p0);"></span><strong>0</strong> · Foundation · pre-build</div>
-        <div class="legend-item"><span class="legend-dot" style="background: var(--p1);"></span><strong>1</strong> · Resident MVP · towers &amp; facilities</div>
-        <div class="legend-item"><span class="legend-dot" style="background: var(--p2);"></span><strong>2</strong> · Commerce · mall &amp; visitors</div>
-        <div class="legend-item"><span class="legend-dot" style="background: var(--p3);"></span><strong>3</strong> · Loyalty engine · whole ecosystem</div>
-        <div class="legend-item"><span class="legend-dot" style="background: var(--p4);"></span><strong>4</strong> · Network · next developments</div>
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-val">2K<span class="small">+</span></div>
+        <div class="metric-lbl">Users at pilot launch from The Tenz alone</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">10K<span class="small">+</span></div>
+        <div class="metric-lbl">Network scale across Aman Cove &amp; Midtown</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">20K<span class="small">+</span></div>
+        <div class="metric-lbl">Full ecosystem with external brand partners</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">∞</div>
+        <div class="metric-lbl">Compounding data, behaviour and revenue loops</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- TIMELINE PHASES -->
-  <div class="timeline-section">
-    <div class="section-head">
-      <span class="num">02</span>
-      <span class="title">The roadmap · <span class="serif">phased to compound</span></span>
-      <hr>
-      <span class="note">v2 · ranges &amp; kill criteria · revised</span>
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-headline">
+        Build →<br>
+        Connect →<br>
+        Engage →<br>
+        <span class="italic">Monetise.</span>
+      </div>
     </div>
-
-    <div class="timeline">
-
-      <!-- PHASE 0 -->
-      <div class="phase p0">
-        <div class="phase-top">
-          <div style="display: flex; align-items: center; gap: 5px;">
-            <span class="phase-pin">0</span>
-            <span class="phase-num">Phase 00</span>
-          </div>
-          <span class="phase-time">Next 60–90d</span>
-        </div>
-        <div class="phase-title">Foundation</div>
-        <div class="phase-wedge">Before any code. Get the unknowns answered.</div>
-
-        <div class="phase-section">
-          <div class="lbl">Validate &amp; scope</div>
-          <ul>
-            <li>The Tenz handover &amp; occupancy timeline</li>
-            <li>Competitive scan · KL township apps</li>
-            <li>Resident research · 20+ interviews</li>
-            <li>Loyalty engine build vs buy review</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">Stand up</div>
-          <ul>
-            <li>Hire product lead &amp; squad</li>
-            <li>Vendor longlist (payments, infra)</li>
-            <li>Phase 1 budget envelope sign-off</li>
-          </ul>
-        </div>
-
-        <div class="phase-foot">
-          <div class="row">
-            <div class="col">
-              <div class="lbl">Budget</div>
-              <div class="val">RM 150–300K</div>
-            </div>
-            <div class="col">
-              <div class="lbl">Team</div>
-              <div class="val">2–3 FTE</div>
-            </div>
-          </div>
-          <div class="lbl">Kill criteria</div>
-          <div class="kill">If competitive scan shows mature incumbent in The Tenz catchment, re-evaluate differentiation before Phase 1.</div>
-        </div>
-      </div>
-
-      <!-- PHASE 1 -->
-      <div class="phase p1">
-        <div class="phase-top">
-          <div style="display: flex; align-items: center; gap: 5px;">
-            <span class="phase-pin">1</span>
-            <span class="phase-num">Phase 01</span>
-          </div>
-          <span class="phase-time">Q4 26 → Q2 27</span>
-        </div>
-        <div class="phase-title">Resident MVP</div>
-        <div class="phase-wedge">Resident-only. No tenants, no points. Win daily use first.</div>
-
-        <div class="phase-section">
-          <div class="lbl">Resident app · iOS &amp; Android</div>
-          <ul>
-            <li>Digital access &amp; visitor QR</li>
-            <li>Maintenance payment (FPX, DuitNow)</li>
-            <li>Facility booking</li>
-            <li>Defect reporting &amp; announcements</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">Imperio admin console</div>
-          <ul>
-            <li>Resident &amp; billing management</li>
-            <li>Concierge / security daily tools</li>
-            <li>PDPA consent &amp; data governance v1</li>
-          </ul>
-        </div>
-
-        <div class="phase-foot">
-          <div class="row">
-            <div class="col">
-              <div class="lbl">Budget</div>
-              <div class="val">RM 1.5–3M</div>
-            </div>
-            <div class="col">
-              <div class="lbl">DAU/MAU</div>
-              <div class="val">30–45%</div>
-            </div>
-          </div>
-          <div class="lbl">Kill criteria</div>
-          <div class="kill">If onboarding &lt; 50% of residents by mo. 6, pause Phase 2 and rebuild adoption strategy.</div>
-        </div>
-      </div>
-
-      <!-- PHASE 2 -->
-      <div class="phase p2">
-        <div class="phase-top">
-          <div style="display: flex; align-items: center; gap: 5px;">
-            <span class="phase-pin">2</span>
-            <span class="phase-num">Phase 02</span>
-          </div>
-          <span class="phase-time">Q3 27 → Q1 28</span>
-        </div>
-        <div class="phase-title">Commerce</div>
-        <div class="phase-wedge">Tenants and visitors come online. Layered footfall tracking starts here.</div>
-
-        <div class="phase-section">
-          <div class="lbl">Visitor PWA · no install</div>
-          <ul>
-            <li>Mall directory &amp; promo feed</li>
-            <li>QR check-in to earn</li>
-            <li>Wayfinding &amp; hours</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">Tenant portal</div>
-          <ul>
-            <li>Campaign &amp; promo creation</li>
-            <li>Footfall analytics (QR + transaction)</li>
-            <li>High-touch onboarding playbook</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">Resident expansion</div>
-          <ul>
-            <li>Discover feed · single-tenant points</li>
-            <li>Early AI concierge (commerce only)</li>
-          </ul>
-        </div>
-
-        <div class="phase-foot">
-          <div class="row">
-            <div class="col">
-              <div class="lbl">Budget</div>
-              <div class="val">RM 2–4M</div>
-            </div>
-            <div class="col">
-              <div class="lbl">Tenant active</div>
-              <div class="val">40–60%</div>
-            </div>
-          </div>
-          <div class="lbl">Kill criteria</div>
-          <div class="kill">If tenant ROI not provable by qtr-end, revisit pricing &amp; campaign model before Phase 3 spend.</div>
-        </div>
-      </div>
-
-      <!-- PHASE 3 -->
-      <div class="phase p3">
-        <div class="phase-top">
-          <div style="display: flex; align-items: center; gap: 5px;">
-            <span class="phase-pin">3</span>
-            <span class="phase-num">Phase 03</span>
-          </div>
-          <span class="phase-time">Q2 28 → Q4 28</span>
-        </div>
-        <div class="phase-title">Loyalty Engine</div>
-        <div class="phase-wedge">Build the proprietary cross-tenant engine. Decision: revisit build vs buy with real data.</div>
-
-        <div class="phase-section">
-          <div class="lbl">Engine</div>
-          <ul>
-            <li>Cross-tenant earn &amp; redeem</li>
-            <li>Imperio-funded points pool</li>
-            <li>Settlement &amp; reconciliation</li>
-            <li>Liability tracking &amp; expiry</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">Behaviour layer</div>
-          <ul>
-            <li>Tier system &amp; exclusives</li>
-            <li>Personalised offers (ML)</li>
-            <li>AI concierge expansion</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">Data &amp; warehouse</div>
-          <ul>
-            <li>Unified data layer</li>
-            <li>Behaviour analytics dashboards</li>
-          </ul>
-        </div>
-
-        <div class="phase-foot">
-          <div class="row">
-            <div class="col">
-              <div class="lbl">Budget</div>
-              <div class="val">RM 2.5–5M</div>
-            </div>
-            <div class="col">
-              <div class="lbl">Breakage</div>
-              <div class="val">&lt; 30%</div>
-            </div>
-          </div>
-          <div class="lbl">Kill criteria</div>
-          <div class="kill">If liability exposure exceeds modelled cap, freeze new earn-events until economics rebalanced.</div>
-        </div>
-      </div>
-
-      <!-- PHASE 4 -->
-      <div class="phase p4">
-        <div class="phase-top">
-          <div style="display: flex; align-items: center; gap: 5px;">
-            <span class="phase-pin">4</span>
-            <span class="phase-num">Phase 04</span>
-          </div>
-          <span class="phase-time">2029+</span>
-        </div>
-        <div class="phase-title">Network &amp; Intelligence</div>
-        <div class="phase-wedge">Roll across Imperio's portfolio. Open new revenue lines from owned data.</div>
-
-        <div class="phase-section">
-          <div class="lbl">Scale</div>
-          <ul>
-            <li>Aman Cove &amp; Midtown rollout</li>
-            <li>Cross-development points portability</li>
-            <li>Shared resident identity</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">Intelligence</div>
-          <ul>
-            <li>Predictive facilities &amp; maintenance</li>
-            <li>Sustainability &amp; utility tracking</li>
-            <li>AI concierge full ecosystem</li>
-          </ul>
-        </div>
-        <div class="phase-section">
-          <div class="lbl">New revenue</div>
-          <ul>
-            <li>Embedded finance partners</li>
-            <li>Data products for leasing</li>
-            <li>Resident-to-resident marketplace</li>
-          </ul>
-        </div>
-
-        <div class="phase-foot">
-          <div class="row">
-            <div class="col">
-              <div class="lbl">Budget</div>
-              <div class="val">TBD</div>
-            </div>
-            <div class="col">
-              <div class="lbl">Sites live</div>
-              <div class="val">3+</div>
-            </div>
-          </div>
-          <div class="lbl">Kill criteria</div>
-          <div class="kill">If The Tenz P&amp;L isn't positive by Phase 4 start, defer scale-up — fix unit economics first.</div>
-        </div>
-      </div>
-
+    <div class="footer-col">
+      <h4>Project</h4>
+      <ul>
+        <li>ConnectX Platform</li>
+        <li>The Tenz Pilot</li>
+        <li>Roadmap</li>
+        <li>Whitepaper</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>For</h4>
+      <ul>
+        <li>Residents</li>
+        <li>Tenants</li>
+        <li>Visitors</li>
+        <li>Developer Partners</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in touch</h4>
+      <p>This is a concept preview prepared for Imperio. All visuals, naming and copy are exploratory and open to direction.</p>
     </div>
   </div>
-
-  <!-- BOTTOM ROW -->
-  <div class="bottom-row">
-    <div class="panel dark">
-      <div class="panel-label">North-star metrics · directional</div>
-      <div class="star-grid">
-        <div class="star"><span class="v">DAU/MAU</span><span class="l">Resident engagement</span></div>
-        <div class="star"><span class="v">NPS</span><span class="l">Resident satisfaction</span></div>
-        <div class="star"><span class="v">Tenant ROI</span><span class="l">Provable per campaign</span></div>
-        <div class="star"><span class="v">Liability</span><span class="l">Points outstanding</span></div>
-        <div class="star"><span class="v">Cross-tenant</span><span class="l">% of total txns</span></div>
-        <div class="star"><span class="v">CAC saved</span><span class="l">Vs traditional mkting</span></div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-label">Risks to manage</div>
-      <div class="risk-item"><span class="tag">i</span><div><strong>Points liability on balance sheet.</strong> <span>Cap exposure; model breakage early.</span></div></div>
-      <div class="risk-item"><span class="tag">ii</span><div><strong>Tenant tech maturity.</strong> <span>Design QR-first fallback; no POS dependency.</span></div></div>
-      <div class="risk-item"><span class="tag">iii</span><div><strong>PDPA &amp; consent.</strong> <span>Build governance in Phase 1, not Phase 3.</span></div></div>
-      <div class="risk-item"><span class="tag">iv</span><div><strong>Engineering talent.</strong> <span>Senior loyalty engineers scarce; staff early.</span></div></div>
-      <div class="risk-item"><span class="tag">v</span><div><strong>Timeline optimism.</strong> <span>v1 dates slipped right vs deck assumptions.</span></div></div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-label">Open questions · 30 days</div>
-      <div class="next-item"><span class="box"></span><div><strong>The Tenz occupancy timing.</strong> <span>Confirms Phase 1 launch window.</span></div></div>
-      <div class="next-item"><span class="box"></span><div><strong>Tech stack &amp; partner shape.</strong> <span>In-house squad vs hybrid build.</span></div></div>
-      <div class="next-item"><span class="box"></span><div><strong>Payment gateway.</strong> <span>DuitNow + cards minimum commit.</span></div></div>
-      <div class="next-item"><span class="box"></span><div><strong>Phase 1 budget envelope.</strong> <span>OPEX shape &amp; CAPEX commit.</span></div></div>
-      <div class="next-item"><span class="box"></span><div><strong>Loyalty build vs buy review.</strong> <span>Phase 3 decision, not Phase 0.</span></div></div>
-    </div>
+  <div class="footer-base">
+    <span>© 2026 · Concept preview for Imperio</span>
+    <span>imperio<span style="color: var(--accent);">.</span></span>
   </div>
-
-  <!-- FOOTER -->
-  <div class="foot">
-    <span>imperio<span style="color: var(--accent);">.</span> · ConnectX product roadmap · v2.0</span>
-    <span>Working draft · For internal circulation only · Ranges and dates subject to Phase 0 validation</span>
-  </div>
-
-</div>
+</footer>
 
 </body>
 </html>
