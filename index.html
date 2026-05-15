@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConnectX — Product Roadmap v2 · Internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f1eeea;
+    --paper: #ffffff;
+    --ink: #0a0a0a;
+    --ink-muted: #5e5e5e;
+    --ink-soft: #9a9a9a;
+    --accent: #6d4eff;
+    --accent-soft: #ece6ff;
+    --peach-1: #ffd9c2;
+    --peach-2: #ffb59a;
+    --coral: #ff8b6b;
+    --green: #2f9a5e;
+    --amber: #c98a00;
+    --teal: #2c8a8a;
+    --line: rgba(10,10,10,0.1);
+    --line-strong: rgba(10,10,10,0.2);
+
+    /* Phase colors */
+    --p0: #8c8c8c;
+    --p1: #6d4eff;
+    --p2: #ff8b6b;
+    --p3: #2f9a5e;
+    --p4: #c98a00;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-feature-settings: "ss01", "ss02";
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .serif { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.01em; }
+  .italic { font-style: italic; }
+
+  /* ===== PAGE ===== */
+  .page {
+    width: 297mm;
+    min-height: 210mm;
+    background: var(--paper);
+    padding: 12mm 12mm 10mm;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 8px;
+    border-bottom: 1.5px solid var(--ink);
+    margin-bottom: 10px;
+  }
+  .header-left .brand {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 2px;
+  }
+  .brand-dot { color: var(--accent); }
+  .header-left h1 {
+    font-size: 26px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .header-left h1 .serif { font-size: 1.05em; line-height: 0.9; }
+  .header-right {
+    text-align: right;
+  }
+  .meta-line {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    font-size: 8px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .meta-line strong { color: var(--ink); font-weight: 600; }
+  .stamp {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 7.5px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 2px 7px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+  }
+
+  /* ===== TOP STRIP : MISSION + DECISIONS ===== */
+  .top-strip {
+    display: grid;
+    grid-template-columns: 1.4fr 2fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .mission {
+    background: linear-gradient(135deg, #0a0a0a 0%, #2a1f4f 100%);
+    color: #fff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mission::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, rgba(255,217,194,0.5) 0%, transparent 70%);
+  }
+  .mission .label {
+    font-size: 7.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.6;
+    margin-bottom: 4px;
+  }
+  .mission .text {
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    line-height: 1.15;
+    position: relative;
+    z-index: 2;
+  }
+  .mission .text .italic { color: var(--peach-1); }
+  .mission .sub {
+    font-size: 8.5px;
+    line-height: 1.5;
+    opacity: 0.7;
+    margin-top: 6px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .decisions {
+    background: var(--bg);
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+  }
+  .decisions .label {
+    font-size: 7.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+  .dec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 12px;
+  }
+  .dec {
+    display: flex;
+    gap: 6px;
+    font-size: 8.5px;
+    line-height: 1.3;
+  }
+  .dec .n {
+    font-family: 'Instrument Serif', serif;
+    font-size: 11px;
+    line-height: 1;
+    color: var(--accent);
+    flex-shrink: 0;
+    width: 12px;
+  }
+  .dec strong { font-weight: 700; }
+  .dec span { color: var(--ink-muted); }
+
+  /* ===== TOWNSHIP MAP SECTION ===== */
+  .map-section {
+    margin-bottom: 10px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .section-head .num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+  .section-head .title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .section-head .title .serif { font-style: italic; color: var(--ink-muted); font-weight: 400; }
+  .section-head hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+  .section-head .note {
+    font-size: 8px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .map-canvas {
+    background: linear-gradient(180deg, #fafaf7 0%, #f1eeea 100%);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .map-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .map-legend {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    font-size: 7.5px;
+  }
+  .legend-title {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1.5;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ===== TIMELINE PHASES ===== */
+  .timeline-section {
+    margin-bottom: 10px;
+  }
+  .timeline {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr 1fr 1fr 1fr;
+    gap: 6px;
+  }
+  .phase {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .phase::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10px; right: 10px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+  }
+  .phase.p0::before { background: var(--p0); }
+  .phase.p1::before { background: var(--p1); }
+  .phase.p2::before { background: var(--p2); }
+  .phase.p3::before { background: var(--p3); }
+  .phase.p4::before { background: var(--p4); }
+
+  .phase-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    gap: 4px;
+  }
+  .phase-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-style: italic;
+  }
+  .phase.p0 .phase-num { color: var(--p0); }
+  .phase.p1 .phase-num { color: var(--p1); }
+  .phase.p2 .phase-num { color: var(--p2); }
+  .phase.p3 .phase-num { color: var(--p3); }
+  .phase.p4 .phase-num { color: var(--p4); }
+
+  .phase-pin {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .phase.p0 .phase-pin { background: var(--p0); }
+  .phase.p1 .phase-pin { background: var(--p1); }
+  .phase.p2 .phase-pin { background: var(--p2); }
+  .phase.p3 .phase-pin { background: var(--p3); }
+  .phase.p4 .phase-pin { background: var(--p4); }
+
+  .phase-time {
+    font-size: 7px;
+    background: var(--bg);
+    padding: 2px 5px;
+    border-radius: 100px;
+    color: var(--ink-muted);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .phase-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 3px;
+  }
+  .phase-wedge {
+    font-size: 7.5px;
+    color: var(--ink-muted);
+    line-height: 1.3;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--line);
+    font-style: italic;
+  }
+
+  .phase-section {
+    margin-bottom: 5px;
+  }
+  .phase-section .lbl {
+    font-size: 6.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .phase-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .phase-section li {
+    font-size: 7.5px;
+    line-height: 1.3;
+    padding: 0px 0;
+    color: var(--ink);
+    display: flex;
+    gap: 4px;
+  }
+  .phase-section li::before {
+    content: '·';
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+
+  .phase-foot {
+    margin-top: auto;
+    padding-top: 5px;
+    border-top: 1px solid var(--line);
+  }
+  .phase-foot .row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .phase-foot .col {
+    flex: 1;
+    min-width: 0;
+  }
+  .phase-foot .lbl {
+    font-size: 6.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    margin-bottom: 1px;
+    font-weight: 600;
+  }
+  .phase-foot .val {
+    font-size: 8px;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+  .phase-foot .kill {
+    font-size: 7px;
+    line-height: 1.3;
+    color: var(--coral);
+    font-style: italic;
+  }
+
+  /* ===== BOTTOM ROW ===== */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .panel {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 9px 11px;
+    border: 1px solid var(--line);
+  }
+  .panel.dark {
+    background: #0a0a0a;
+    color: #fff;
+    border-color: #0a0a0a;
+  }
+  .panel-label {
+    font-size: 7.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .panel.dark .panel-label { color: rgba(255,255,255,0.55); }
+
+  .star-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 10px;
+  }
+  .star {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+  .star .v {
+    font-family: 'Instrument Serif', serif;
+    font-size: 13px;
+    line-height: 1;
+    color: var(--peach-1);
+    display: block;
+    margin-bottom: 1px;
+  }
+  .star .l {
+    opacity: 0.75;
+    font-size: 7.5px;
+  }
+
+  .risk-item {
+    display: flex;
+    gap: 6px;
+    font-size: 8px;
+    line-height: 1.3;
+    padding: 2px 0;
+  }
+  .risk-item .tag {
+    font-family: 'Instrument Serif', serif;
+    font-size: 10px;
+    color: var(--accent);
+    font-style: italic;
+    flex-shrink: 0;
+    width: 14px;
+  }
+  .risk-item strong {
+    font-weight: 700;
+  }
+  .risk-item span {
+    color: var(--ink-muted);
+  }
+
+  .next-item {
+    display: flex;
+    gap: 6px;
+    font-size: 8px;
+    line-height: 1.3;
+    padding: 2px 0;
+    align-items: flex-start;
+  }
+  .next-item .box {
+    width: 9px; height: 9px;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .next-item strong { font-weight: 700; }
+  .next-item span { color: var(--ink-muted); }
+
+  /* ===== FOOTER ===== */
+  .foot {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-size: 7px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  /* ===== MAP STYLES ===== */
+  .building-shadow { fill: rgba(10,10,10,0.08); }
+  .tower-side-1 { fill: #d6d0c8; }
+  .tower-side-2 { fill: #c3bdb5; }
+  .tower-top { fill: #ebe6df; }
+  .mall-side-1 { fill: #e8dcc8; }
+  .mall-side-2 { fill: #d4c5ad; }
+  .mall-top { fill: #f4ead8; }
+  .plaza { fill: #d4e8d4; }
+  .road { fill: #b8b0a4; }
+  .water { fill: #b8d4e0; }
+  .grass { fill: #c8e0c0; }
+  .window { fill: #6b7c8a; opacity: 0.7; }
+
+  .pin {
+    cursor: pointer;
+  }
+  .pin-pulse {
+    transform-origin: center;
+    animation: pinPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pinPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0; transform: scale(2.2); }
+  }
+  .pin-num {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    fill: #fff;
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+  .pin-label {
+    font-family: 'Manrope', sans-serif;
+    font-size: 8.5px;
+    font-weight: 700;
+    fill: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .pin-sublabel {
+    font-family: 'Instrument Serif', serif;
+    font-size: 10px;
+    font-style: italic;
+    fill: var(--ink-muted);
+  }
+  .leader-line {
+    stroke: var(--ink);
+    stroke-width: 0.6;
+    stroke-dasharray: 2 2;
+    fill: none;
+  }
+
+  /* ===== PRINT ===== */
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  @media print {
+    body {
+      padding: 0;
+      background: white;
+    }
+    .page {
+      box-shadow: none;
+      width: 297mm;
+      min-height: 210mm;
+      page-break-after: avoid;
+    }
+    .pin-pulse { animation: none; opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="brand">imperio<span class="brand-dot">.</span></div>
+      <h1>ConnectX · <span class="serif italic">Product Roadmap</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="meta-line">
+        <span>Document <strong>v2.0</strong></span>
+        <span>Pilot <strong>The Tenz</strong></span>
+        <span>Owner <strong>Product · Imperio</strong></span>
+        <span>Date <strong>May 2026</strong></span>
+      </div>
+      <span class="stamp">Internal · Confidential · Working Draft</span>
+    </div>
+  </div>
+
+  <!-- TOP STRIP -->
+  <div class="top-strip">
+    <div class="mission">
+      <div class="label">North Star</div>
+      <div class="text">Make The Tenz the most <span class="italic">effortlessly connected</span> place to live in KL — then scale the operating system across every Imperio development.</div>
+      <div class="sub">Win residents first · Earn tenant value · Compound through data · Built and owned in-house.</div>
+    </div>
+    <div class="decisions">
+      <div class="label">Strategic decisions · Locked</div>
+      <div class="dec-grid">
+        <div class="dec"><span class="n">1</span><div><strong>Owned, not licensed</strong> · <span>Imperio developments only</span></div></div>
+        <div class="dec"><span class="n">2</span><div><strong>Imperio funds points</strong> · <span>Subsidised initially; revisit Phase 3</span></div></div>
+        <div class="dec"><span class="n">3</span><div><strong>Two front-ends</strong> · <span>Native app for residents · PWA for visitors</span></div></div>
+        <div class="dec"><span class="n">4</span><div><strong>Wedge: convenience</strong> · <span>Daily resident utility before commerce</span></div></div>
+        <div class="dec"><span class="n">5</span><div><strong>Build the engine</strong> · <span>Decision revisited end of Phase 2</span></div></div>
+        <div class="dec"><span class="n">6</span><div><strong>Pilot The Tenz</strong> · <span>Aman Cove &amp; Midtown follow proof</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOWNSHIP MAP -->
+  <div class="map-section">
+    <div class="section-head">
+      <span class="num">01</span>
+      <span class="title">The Tenz · <span class="serif">where each phase lives</span></span>
+      <hr>
+      <span class="note">Isometric reference · Not to scale</span>
+    </div>
+    <div class="map-canvas">
+      <svg class="map-svg" viewBox="0 0 1080 320" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- BASE GROUND -->
+        <rect x="0" y="0" width="1080" height="320" fill="transparent"/>
+
+        <!-- ROAD GRID (isometric) -->
+        <polygon points="60,220 540,140 1020,220 540,300" class="road" opacity="0.5"/>
+        <polygon points="540,140 540,300 540,300 540,140" stroke="#a89e8f" stroke-width="0.5" fill="none"/>
+
+        <!-- GRASS / PLAZA -->
+        <polygon points="380,180 540,140 700,180 540,220" class="plaza"/>
+
+        <!-- TREES -->
+        <g opacity="0.7">
+          <circle cx="200" cy="200" r="6" fill="#7aa97a"/>
+          <circle cx="220" cy="195" r="5" fill="#8bb88b"/>
+          <circle cx="880" cy="200" r="6" fill="#7aa97a"/>
+          <circle cx="860" cy="195" r="5" fill="#8bb88b"/>
+          <circle cx="490" cy="170" r="4" fill="#8bb88b"/>
+          <circle cx="590" cy="170" r="4" fill="#8bb88b"/>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- TOWER A (LEFT) - Phase 1 Resident Living -->
+        <!-- ============================================ -->
+        <g id="tower-a">
+          <!-- shadow -->
+          <polygon points="160,180 240,180 250,195 150,195" class="building-shadow"/>
+          <!-- right side -->
+          <polygon points="220,60 240,70 240,180 220,170" class="tower-side-2"/>
+          <!-- front side -->
+          <polygon points="160,60 220,60 220,170 160,180" class="tower-side-1"/>
+          <!-- top -->
+          <polygon points="160,60 220,60 240,70 180,70" class="tower-top"/>
+          <!-- windows -->
+          <g class="window">
+            <rect x="167" y="75" width="6" height="4"/>
+            <rect x="178" y="75" width="6" height="4"/>
+            <rect x="189" y="75" width="6" height="4"/>
+            <rect x="200" y="75" width="6" height="4"/>
+            <rect x="211" y="75" width="6" height="4"/>
+            <rect x="167" y="90" width="6" height="4"/>
+            <rect x="178" y="90" width="6" height="4"/>
+            <rect x="189" y="90" width="6" height="4"/>
+            <rect x="200" y="90" width="6" height="4"/>
+            <rect x="211" y="90" width="6" height="4"/>
+            <rect x="167" y="105" width="6" height="4"/>
+            <rect x="178" y="105" width="6" height="4"/>
+            <rect x="189" y="105" width="6" height="4"/>
+            <rect x="200" y="105" width="6" height="4"/>
+            <rect x="211" y="105" width="6" height="4"/>
+            <rect x="167" y="120" width="6" height="4"/>
+            <rect x="178" y="120" width="6" height="4"/>
+            <rect x="189" y="120" width="6" height="4"/>
+            <rect x="200" y="120" width="6" height="4"/>
+            <rect x="211" y="120" width="6" height="4"/>
+            <rect x="167" y="135" width="6" height="4"/>
+            <rect x="178" y="135" width="6" height="4"/>
+            <rect x="189" y="135" width="6" height="4"/>
+            <rect x="200" y="135" width="6" height="4"/>
+            <rect x="211" y="135" width="6" height="4"/>
+            <rect x="167" y="150" width="6" height="4"/>
+            <rect x="178" y="150" width="6" height="4"/>
+            <rect x="189" y="150" width="6" height="4"/>
+            <rect x="200" y="150" width="6" height="4"/>
+            <rect x="211" y="150" width="6" height="4"/>
+          </g>
+          <!-- side window detail -->
+          <g class="window">
+            <rect x="225" y="80" width="3" height="4"/>
+            <rect x="232" y="83" width="3" height="4"/>
+            <rect x="225" y="95" width="3" height="4"/>
+            <rect x="232" y="98" width="3" height="4"/>
+            <rect x="225" y="110" width="3" height="4"/>
+            <rect x="232" y="113" width="3" height="4"/>
+            <rect x="225" y="125" width="3" height="4"/>
+            <rect x="232" y="128" width="3" height="4"/>
+            <rect x="225" y="140" width="3" height="4"/>
+            <rect x="232" y="143" width="3" height="4"/>
+          </g>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- TOWER B (LEFT-CENTER) -->
+        <!-- ============================================ -->
+        <g id="tower-b">
+          <polygon points="285,170 355,170 365,182 275,182" class="building-shadow"/>
+          <polygon points="340,80 355,88 355,170 340,162" class="tower-side-2"/>
+          <polygon points="285,80 340,80 340,162 285,170" class="tower-side-1"/>
+          <polygon points="285,80 340,80 355,88 300,88" class="tower-top"/>
+          <g class="window">
+            <rect x="291" y="95" width="5" height="4"/>
+            <rect x="301" y="95" width="5" height="4"/>
+            <rect x="311" y="95" width="5" height="4"/>
+            <rect x="321" y="95" width="5" height="4"/>
+            <rect x="331" y="95" width="5" height="4"/>
+            <rect x="291" y="108" width="5" height="4"/>
+            <rect x="301" y="108" width="5" height="4"/>
+            <rect x="311" y="108" width="5" height="4"/>
+            <rect x="321" y="108" width="5" height="4"/>
+            <rect x="331" y="108" width="5" height="4"/>
+            <rect x="291" y="121" width="5" height="4"/>
+            <rect x="301" y="121" width="5" height="4"/>
+            <rect x="311" y="121" width="5" height="4"/>
+            <rect x="321" y="121" width="5" height="4"/>
+            <rect x="331" y="121" width="5" height="4"/>
+            <rect x="291" y="134" width="5" height="4"/>
+            <rect x="301" y="134" width="5" height="4"/>
+            <rect x="311" y="134" width="5" height="4"/>
+            <rect x="321" y="134" width="5" height="4"/>
+            <rect x="331" y="134" width="5" height="4"/>
+            <rect x="291" y="147" width="5" height="4"/>
+            <rect x="301" y="147" width="5" height="4"/>
+            <rect x="311" y="147" width="5" height="4"/>
+            <rect x="321" y="147" width="5" height="4"/>
+            <rect x="331" y="147" width="5" height="4"/>
+          </g>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- MALL / RETAIL PODIUM (CENTER) - Phase 2 Commerce -->
+        <!-- ============================================ -->
+        <g id="mall">
+          <polygon points="425,235 695,235 715,255 405,255" class="building-shadow"/>
+          <!-- right side -->
+          <polygon points="660,195 695,215 695,235 660,225" class="mall-side-2"/>
+          <!-- front side -->
+          <polygon points="425,195 660,195 660,225 425,235" class="mall-side-1"/>
+          <!-- top -->
+          <polygon points="425,195 660,195 695,215 460,215" class="mall-top"/>
+          <!-- storefront divisions -->
+          <g stroke="#a89878" stroke-width="0.4" fill="none">
+            <line x1="460" y1="195" x2="450" y2="235"/>
+            <line x1="495" y1="195" x2="485" y2="235"/>
+            <line x1="530" y1="195" x2="520" y2="235"/>
+            <line x1="565" y1="195" x2="555" y2="235"/>
+            <line x1="600" y1="195" x2="590" y2="235"/>
+            <line x1="635" y1="195" x2="625" y2="235"/>
+          </g>
+          <!-- windows / signage -->
+          <g fill="#c98a00" opacity="0.5">
+            <rect x="437" y="218" width="20" height="3"/>
+            <rect x="472" y="218" width="20" height="3"/>
+            <rect x="507" y="218" width="20" height="3"/>
+            <rect x="542" y="218" width="20" height="3"/>
+            <rect x="577" y="218" width="20" height="3"/>
+            <rect x="612" y="218" width="20" height="3"/>
+          </g>
+          <!-- mall entrance arch -->
+          <rect x="540" y="222" width="14" height="13" fill="#3a3530"/>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- TOWER C (RIGHT-CENTER) -->
+        <!-- ============================================ -->
+        <g id="tower-c">
+          <polygon points="730,170 800,170 810,182 720,182" class="building-shadow"/>
+          <polygon points="785,80 800,88 800,170 785,162" class="tower-side-2"/>
+          <polygon points="730,80 785,80 785,162 730,170" class="tower-side-1"/>
+          <polygon points="730,80 785,80 800,88 745,88" class="tower-top"/>
+          <g class="window">
+            <rect x="736" y="95" width="5" height="4"/>
+            <rect x="746" y="95" width="5" height="4"/>
+            <rect x="756" y="95" width="5" height="4"/>
+            <rect x="766" y="95" width="5" height="4"/>
+            <rect x="776" y="95" width="5" height="4"/>
+            <rect x="736" y="108" width="5" height="4"/>
+            <rect x="746" y="108" width="5" height="4"/>
+            <rect x="756" y="108" width="5" height="4"/>
+            <rect x="766" y="108" width="5" height="4"/>
+            <rect x="776" y="108" width="5" height="4"/>
+            <rect x="736" y="121" width="5" height="4"/>
+            <rect x="746" y="121" width="5" height="4"/>
+            <rect x="756" y="121" width="5" height="4"/>
+            <rect x="766" y="121" width="5" height="4"/>
+            <rect x="776" y="121" width="5" height="4"/>
+            <rect x="736" y="134" width="5" height="4"/>
+            <rect x="746" y="134" width="5" height="4"/>
+            <rect x="756" y="134" width="5" height="4"/>
+            <rect x="766" y="134" width="5" height="4"/>
+            <rect x="776" y="134" width="5" height="4"/>
+            <rect x="736" y="147" width="5" height="4"/>
+            <rect x="746" y="147" width="5" height="4"/>
+            <rect x="756" y="147" width="5" height="4"/>
+            <rect x="766" y="147" width="5" height="4"/>
+            <rect x="776" y="147" width="5" height="4"/>
+          </g>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- TOWER D (RIGHT) - Aman Cove / Midtown stand-in -->
+        <!-- ============================================ -->
+        <g id="tower-d" opacity="0.55">
+          <polygon points="850,200 920,200 930,212 840,212" class="building-shadow"/>
+          <polygon points="905,120 920,128 920,200 905,192" class="tower-side-2"/>
+          <polygon points="850,120 905,120 905,192 850,200" class="tower-side-1"/>
+          <polygon points="850,120 905,120 920,128 865,128" class="tower-top"/>
+          <g class="window">
+            <rect x="856" y="135" width="5" height="4"/>
+            <rect x="866" y="135" width="5" height="4"/>
+            <rect x="876" y="135" width="5" height="4"/>
+            <rect x="886" y="135" width="5" height="4"/>
+            <rect x="896" y="135" width="5" height="4"/>
+            <rect x="856" y="148" width="5" height="4"/>
+            <rect x="866" y="148" width="5" height="4"/>
+            <rect x="876" y="148" width="5" height="4"/>
+            <rect x="886" y="148" width="5" height="4"/>
+            <rect x="896" y="148" width="5" height="4"/>
+            <rect x="856" y="161" width="5" height="4"/>
+            <rect x="866" y="161" width="5" height="4"/>
+            <rect x="876" y="161" width="5" height="4"/>
+            <rect x="886" y="161" width="5" height="4"/>
+            <rect x="896" y="161" width="5" height="4"/>
+            <rect x="856" y="174" width="5" height="4"/>
+            <rect x="866" y="174" width="5" height="4"/>
+            <rect x="876" y="174" width="5" height="4"/>
+            <rect x="886" y="174" width="5" height="4"/>
+            <rect x="896" y="174" width="5" height="4"/>
+          </g>
+        </g>
+        <text x="885" y="225" text-anchor="middle" font-family="Manrope" font-size="7" fill="#9a9a9a" font-style="italic">future · Aman Cove</text>
+
+        <!-- ============================================ -->
+        <!-- POOL / FACILITIES (front, between towers) -->
+        <!-- ============================================ -->
+        <g id="pool">
+          <ellipse cx="265" cy="200" rx="32" ry="12" class="water"/>
+          <ellipse cx="265" cy="198" rx="28" ry="8" fill="#d0e4ec" opacity="0.6"/>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- PLAZA / EVENT SPACE -->
+        <!-- ============================================ -->
+        <g id="plaza">
+          <polygon points="380,180 540,140 540,150 380,190" fill="#e8d8c0" opacity="0.5"/>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- GUARD HOUSE / ENTRY (far left) -->
+        <!-- ============================================ -->
+        <g id="guardhouse">
+          <polygon points="80,235 110,235 115,240 75,240" class="building-shadow"/>
+          <polygon points="105,215 115,220 115,235 105,230" class="tower-side-2"/>
+          <polygon points="80,215 105,215 105,230 80,235" class="tower-side-1"/>
+          <polygon points="80,215 105,215 115,220 90,220" class="tower-top"/>
+        </g>
+
+        <!-- ============================================ -->
+        <!-- PHASE PINS WITH LEADER LINES -->
+        <!-- ============================================ -->
+
+        <!-- PIN 0 - Phase 0 - Guard house / entrance (foundation, pre-launch) -->
+        <g class="pin">
+          <line class="leader-line" x1="95" y1="225" x2="60" y2="265"/>
+          <circle class="pin-pulse" cx="95" cy="225" r="8" fill="#8c8c8c"/>
+          <circle cx="95" cy="225" r="9" fill="#8c8c8c" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="95" y="225">0</text>
+          <text class="pin-label" x="60" y="278">Phase 0</text>
+          <text class="pin-sublabel" x="60" y="290">prep · scan</text>
+        </g>
+
+        <!-- PIN 1 - Phase 1 - Tower A & B (resident living, access, payment) -->
+        <g class="pin">
+          <line class="leader-line" x1="190" y1="105" x2="155" y2="40"/>
+          <circle class="pin-pulse" cx="190" cy="105" r="8" fill="#6d4eff"/>
+          <circle cx="190" cy="105" r="10" fill="#6d4eff" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="190" y="105">1</text>
+          <text class="pin-label" x="155" y="30">Phase 1</text>
+          <text class="pin-sublabel" x="155" y="42">resident MVP</text>
+        </g>
+
+        <!-- PIN 1b - Phase 1 - Pool / facilities (booking) -->
+        <g class="pin">
+          <line class="leader-line" x1="265" y1="200" x2="265" y2="245"/>
+          <circle class="pin-pulse" cx="265" cy="200" r="7" fill="#6d4eff"/>
+          <circle cx="265" cy="200" r="8" fill="#6d4eff" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="265" y="200" style="font-size: 9px;">1</text>
+        </g>
+
+        <!-- PIN 2 - Phase 2 - Mall (commerce, tenants, visitors) -->
+        <g class="pin">
+          <line class="leader-line" x1="540" y1="210" x2="540" y2="262"/>
+          <circle class="pin-pulse" cx="540" cy="210" r="9" fill="#ff8b6b"/>
+          <circle cx="540" cy="210" r="11" fill="#ff8b6b" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="540" y="210">2</text>
+          <text class="pin-label" x="540" y="278" text-anchor="middle">Phase 2</text>
+          <text class="pin-sublabel" x="540" y="290" text-anchor="middle">commerce &amp; visitor PWA</text>
+        </g>
+
+        <!-- PIN 2b - additional storefront pin -->
+        <g class="pin">
+          <line class="leader-line" x1="460" y1="218" x2="455" y2="262"/>
+          <circle class="pin-pulse" cx="460" cy="218" r="6" fill="#ff8b6b"/>
+          <circle cx="460" cy="218" r="7" fill="#ff8b6b" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="460" y="218" style="font-size: 8px;">2</text>
+        </g>
+
+        <!-- PIN 3 - Phase 3 - Plaza (loyalty engine = ecosystem center) -->
+        <g class="pin">
+          <line class="leader-line" x1="540" y1="160" x2="540" y2="105"/>
+          <circle class="pin-pulse" cx="540" cy="160" r="9" fill="#2f9a5e"/>
+          <circle cx="540" cy="160" r="11" fill="#2f9a5e" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="540" y="160">3</text>
+          <text class="pin-label" x="540" y="90" text-anchor="middle">Phase 3</text>
+          <text class="pin-sublabel" x="540" y="102" text-anchor="middle">loyalty engine</text>
+        </g>
+
+        <!-- PIN 3b - Tower C (resident-tenant cross-traffic) -->
+        <g class="pin">
+          <line class="leader-line" x1="760" y1="125" x2="800" y2="60"/>
+          <circle class="pin-pulse" cx="760" cy="125" r="7" fill="#2f9a5e"/>
+          <circle cx="760" cy="125" r="8" fill="#2f9a5e" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="760" y="125" style="font-size: 9px;">3</text>
+        </g>
+
+        <!-- PIN 4 - Phase 4 - Tower D (network expansion, intelligence) -->
+        <g class="pin">
+          <line class="leader-line" x1="885" y1="155" x2="965" y2="65"/>
+          <circle class="pin-pulse" cx="885" cy="155" r="9" fill="#c98a00"/>
+          <circle cx="885" cy="155" r="11" fill="#c98a00" stroke="#fff" stroke-width="1.5"/>
+          <text class="pin-num" x="885" y="155">4</text>
+          <text class="pin-label" x="970" y="55">Phase 4</text>
+          <text class="pin-sublabel" x="970" y="67">scale · AI · network</text>
+        </g>
+
+        <!-- WAYFINDING LABEL OVERLAYS -->
+        <text x="190" y="195" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">TOWER A</text>
+        <text x="312" y="195" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">TOWER B</text>
+        <text x="540" y="248" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">THE TENZ MALL</text>
+        <text x="757" y="195" text-anchor="middle" font-family="Manrope" font-size="6.5" fill="#5e5e5e" font-weight="600" letter-spacing="1">TOWER C</text>
+        <text x="265" y="220" text-anchor="middle" font-family="Manrope" font-size="6" fill="#5e5e5e" font-style="italic">facilities</text>
+        <text x="460" y="170" text-anchor="middle" font-family="Manrope" font-size="6" fill="#5e5e5e" font-style="italic">plaza · events</text>
+        <text x="93" y="252" text-anchor="middle" font-family="Manrope" font-size="6" fill="#5e5e5e" font-style="italic">guard · entry</text>
+
+      </svg>
+
+      <!-- LEGEND -->
+      <div class="map-legend">
+        <div class="legend-title">Phase indicators</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--p0);"></span><strong>0</strong> · Foundation · pre-build</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--p1);"></span><strong>1</strong> · Resident MVP · towers &amp; facilities</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--p2);"></span><strong>2</strong> · Commerce · mall &amp; visitors</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--p3);"></span><strong>3</strong> · Loyalty engine · whole ecosystem</div>
+        <div class="legend-item"><span class="legend-dot" style="background: var(--p4);"></span><strong>4</strong> · Network · next developments</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE PHASES -->
+  <div class="timeline-section">
+    <div class="section-head">
+      <span class="num">02</span>
+      <span class="title">The roadmap · <span class="serif">phased to compound</span></span>
+      <hr>
+      <span class="note">v2 · ranges &amp; kill criteria · revised</span>
+    </div>
+
+    <div class="timeline">
+
+      <!-- PHASE 0 -->
+      <div class="phase p0">
+        <div class="phase-top">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <span class="phase-pin">0</span>
+            <span class="phase-num">Phase 00</span>
+          </div>
+          <span class="phase-time">Next 60–90d</span>
+        </div>
+        <div class="phase-title">Foundation</div>
+        <div class="phase-wedge">Before any code. Get the unknowns answered.</div>
+
+        <div class="phase-section">
+          <div class="lbl">Validate &amp; scope</div>
+          <ul>
+            <li>The Tenz handover &amp; occupancy timeline</li>
+            <li>Competitive scan · KL township apps</li>
+            <li>Resident research · 20+ interviews</li>
+            <li>Loyalty engine build vs buy review</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">Stand up</div>
+          <ul>
+            <li>Hire product lead &amp; squad</li>
+            <li>Vendor longlist (payments, infra)</li>
+            <li>Phase 1 budget envelope sign-off</li>
+          </ul>
+        </div>
+
+        <div class="phase-foot">
+          <div class="row">
+            <div class="col">
+              <div class="lbl">Budget</div>
+              <div class="val">RM 150–300K</div>
+            </div>
+            <div class="col">
+              <div class="lbl">Team</div>
+              <div class="val">2–3 FTE</div>
+            </div>
+          </div>
+          <div class="lbl">Kill criteria</div>
+          <div class="kill">If competitive scan shows mature incumbent in The Tenz catchment, re-evaluate differentiation before Phase 1.</div>
+        </div>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase p1">
+        <div class="phase-top">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <span class="phase-pin">1</span>
+            <span class="phase-num">Phase 01</span>
+          </div>
+          <span class="phase-time">Q4 26 → Q2 27</span>
+        </div>
+        <div class="phase-title">Resident MVP</div>
+        <div class="phase-wedge">Resident-only. No tenants, no points. Win daily use first.</div>
+
+        <div class="phase-section">
+          <div class="lbl">Resident app · iOS &amp; Android</div>
+          <ul>
+            <li>Digital access &amp; visitor QR</li>
+            <li>Maintenance payment (FPX, DuitNow)</li>
+            <li>Facility booking</li>
+            <li>Defect reporting &amp; announcements</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">Imperio admin console</div>
+          <ul>
+            <li>Resident &amp; billing management</li>
+            <li>Concierge / security daily tools</li>
+            <li>PDPA consent &amp; data governance v1</li>
+          </ul>
+        </div>
+
+        <div class="phase-foot">
+          <div class="row">
+            <div class="col">
+              <div class="lbl">Budget</div>
+              <div class="val">RM 1.5–3M</div>
+            </div>
+            <div class="col">
+              <div class="lbl">DAU/MAU</div>
+              <div class="val">30–45%</div>
+            </div>
+          </div>
+          <div class="lbl">Kill criteria</div>
+          <div class="kill">If onboarding &lt; 50% of residents by mo. 6, pause Phase 2 and rebuild adoption strategy.</div>
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase p2">
+        <div class="phase-top">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <span class="phase-pin">2</span>
+            <span class="phase-num">Phase 02</span>
+          </div>
+          <span class="phase-time">Q3 27 → Q1 28</span>
+        </div>
+        <div class="phase-title">Commerce</div>
+        <div class="phase-wedge">Tenants and visitors come online. Layered footfall tracking starts here.</div>
+
+        <div class="phase-section">
+          <div class="lbl">Visitor PWA · no install</div>
+          <ul>
+            <li>Mall directory &amp; promo feed</li>
+            <li>QR check-in to earn</li>
+            <li>Wayfinding &amp; hours</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">Tenant portal</div>
+          <ul>
+            <li>Campaign &amp; promo creation</li>
+            <li>Footfall analytics (QR + transaction)</li>
+            <li>High-touch onboarding playbook</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">Resident expansion</div>
+          <ul>
+            <li>Discover feed · single-tenant points</li>
+            <li>Early AI concierge (commerce only)</li>
+          </ul>
+        </div>
+
+        <div class="phase-foot">
+          <div class="row">
+            <div class="col">
+              <div class="lbl">Budget</div>
+              <div class="val">RM 2–4M</div>
+            </div>
+            <div class="col">
+              <div class="lbl">Tenant active</div>
+              <div class="val">40–60%</div>
+            </div>
+          </div>
+          <div class="lbl">Kill criteria</div>
+          <div class="kill">If tenant ROI not provable by qtr-end, revisit pricing &amp; campaign model before Phase 3 spend.</div>
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase p3">
+        <div class="phase-top">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <span class="phase-pin">3</span>
+            <span class="phase-num">Phase 03</span>
+          </div>
+          <span class="phase-time">Q2 28 → Q4 28</span>
+        </div>
+        <div class="phase-title">Loyalty Engine</div>
+        <div class="phase-wedge">Build the proprietary cross-tenant engine. Decision: revisit build vs buy with real data.</div>
+
+        <div class="phase-section">
+          <div class="lbl">Engine</div>
+          <ul>
+            <li>Cross-tenant earn &amp; redeem</li>
+            <li>Imperio-funded points pool</li>
+            <li>Settlement &amp; reconciliation</li>
+            <li>Liability tracking &amp; expiry</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">Behaviour layer</div>
+          <ul>
+            <li>Tier system &amp; exclusives</li>
+            <li>Personalised offers (ML)</li>
+            <li>AI concierge expansion</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">Data &amp; warehouse</div>
+          <ul>
+            <li>Unified data layer</li>
+            <li>Behaviour analytics dashboards</li>
+          </ul>
+        </div>
+
+        <div class="phase-foot">
+          <div class="row">
+            <div class="col">
+              <div class="lbl">Budget</div>
+              <div class="val">RM 2.5–5M</div>
+            </div>
+            <div class="col">
+              <div class="lbl">Breakage</div>
+              <div class="val">&lt; 30%</div>
+            </div>
+          </div>
+          <div class="lbl">Kill criteria</div>
+          <div class="kill">If liability exposure exceeds modelled cap, freeze new earn-events until economics rebalanced.</div>
+        </div>
+      </div>
+
+      <!-- PHASE 4 -->
+      <div class="phase p4">
+        <div class="phase-top">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <span class="phase-pin">4</span>
+            <span class="phase-num">Phase 04</span>
+          </div>
+          <span class="phase-time">2029+</span>
+        </div>
+        <div class="phase-title">Network &amp; Intelligence</div>
+        <div class="phase-wedge">Roll across Imperio's portfolio. Open new revenue lines from owned data.</div>
+
+        <div class="phase-section">
+          <div class="lbl">Scale</div>
+          <ul>
+            <li>Aman Cove &amp; Midtown rollout</li>
+            <li>Cross-development points portability</li>
+            <li>Shared resident identity</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">Intelligence</div>
+          <ul>
+            <li>Predictive facilities &amp; maintenance</li>
+            <li>Sustainability &amp; utility tracking</li>
+            <li>AI concierge full ecosystem</li>
+          </ul>
+        </div>
+        <div class="phase-section">
+          <div class="lbl">New revenue</div>
+          <ul>
+            <li>Embedded finance partners</li>
+            <li>Data products for leasing</li>
+            <li>Resident-to-resident marketplace</li>
+          </ul>
+        </div>
+
+        <div class="phase-foot">
+          <div class="row">
+            <div class="col">
+              <div class="lbl">Budget</div>
+              <div class="val">TBD</div>
+            </div>
+            <div class="col">
+              <div class="lbl">Sites live</div>
+              <div class="val">3+</div>
+            </div>
+          </div>
+          <div class="lbl">Kill criteria</div>
+          <div class="kill">If The Tenz P&amp;L isn't positive by Phase 4 start, defer scale-up — fix unit economics first.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW -->
+  <div class="bottom-row">
+    <div class="panel dark">
+      <div class="panel-label">North-star metrics · directional</div>
+      <div class="star-grid">
+        <div class="star"><span class="v">DAU/MAU</span><span class="l">Resident engagement</span></div>
+        <div class="star"><span class="v">NPS</span><span class="l">Resident satisfaction</span></div>
+        <div class="star"><span class="v">Tenant ROI</span><span class="l">Provable per campaign</span></div>
+        <div class="star"><span class="v">Liability</span><span class="l">Points outstanding</span></div>
+        <div class="star"><span class="v">Cross-tenant</span><span class="l">% of total txns</span></div>
+        <div class="star"><span class="v">CAC saved</span><span class="l">Vs traditional mkting</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-label">Risks to manage</div>
+      <div class="risk-item"><span class="tag">i</span><div><strong>Points liability on balance sheet.</strong> <span>Cap exposure; model breakage early.</span></div></div>
+      <div class="risk-item"><span class="tag">ii</span><div><strong>Tenant tech maturity.</strong> <span>Design QR-first fallback; no POS dependency.</span></div></div>
+      <div class="risk-item"><span class="tag">iii</span><div><strong>PDPA &amp; consent.</strong> <span>Build governance in Phase 1, not Phase 3.</span></div></div>
+      <div class="risk-item"><span class="tag">iv</span><div><strong>Engineering talent.</strong> <span>Senior loyalty engineers scarce; staff early.</span></div></div>
+      <div class="risk-item"><span class="tag">v</span><div><strong>Timeline optimism.</strong> <span>v1 dates slipped right vs deck assumptions.</span></div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-label">Open questions · 30 days</div>
+      <div class="next-item"><span class="box"></span><div><strong>The Tenz occupancy timing.</strong> <span>Confirms Phase 1 launch window.</span></div></div>
+      <div class="next-item"><span class="box"></span><div><strong>Tech stack &amp; partner shape.</strong> <span>In-house squad vs hybrid build.</span></div></div>
+      <div class="next-item"><span class="box"></span><div><strong>Payment gateway.</strong> <span>DuitNow + cards minimum commit.</span></div></div>
+      <div class="next-item"><span class="box"></span><div><strong>Phase 1 budget envelope.</strong> <span>OPEX shape &amp; CAPEX commit.</span></div></div>
+      <div class="next-item"><span class="box"></span><div><strong>Loyalty build vs buy review.</strong> <span>Phase 3 decision, not Phase 0.</span></div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <span>imperio<span style="color: var(--accent);">.</span> · ConnectX product roadmap · v2.0</span>
+    <span>Working draft · For internal circulation only · Ranges and dates subject to Phase 0 validation</span>
+  </div>
+
+</div>
+
+</body>
+</html>
