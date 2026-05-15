@@ -40,7 +40,7 @@
     background: var(--bg);
     color: var(--ink);
     font-feature-settings: "ss01", "ss02";
-    padding: 70px 30px 30px;
+    padding: 30px;
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -49,21 +49,23 @@
   .serif { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.01em; }
   .italic { font-style: italic; }
 
-  /* ===== SITE NAV ===== */
-  .site-nav-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
+  /* ===== SITE HEADER ===== */
+  .site-header {
+    position: sticky;
+    top: 0;
     z-index: 100;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 6px;
-    padding: 14px 24px;
+    padding: 28px 48px;
     background: rgba(241,238,234,0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(10,10,10,0.08);
   }
+  .site-header .brand { font-size: 22px; font-weight: 700; letter-spacing: -0.04em; }
+  .site-header .brand-dot { color: #6d4eff; }
+  .site-nav { display: flex; gap: 6px; }
   .site-nav-link {
     font-family: 'Manrope', sans-serif;
     font-size: 13px;
@@ -637,10 +639,13 @@
 </head>
 <body>
 
-<nav class="site-nav-bar">
-  <a href="index.html" class="site-nav-link">Home</a>
-  <a href="roadmap.html" class="site-nav-link active">Roadmap</a>
-</nav>
+<header class="site-header">
+  <div class="brand">imperio<span class="brand-dot">.</span></div>
+  <nav class="site-nav">
+    <a href="index.html" class="site-nav-link">Home</a>
+    <a href="roadmap.html" class="site-nav-link active">Roadmap</a>
+  </nav>
+</header>
 
 <div class="page">
 
